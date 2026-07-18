@@ -1,0 +1,874 @@
+{
+  "name": "Town~Squared",
+  "ground": {
+    "size": 90,
+    "width": 180,
+    "centerX": -45,
+    "color": "#C4A484",
+    "texture": "assets/textures/grass.png",
+    "repeat": 60
+  },
+  "roadStyle": {
+    "color": "#ffffff",
+    "texture": "assets/textures/road.png",
+    "tileSize": 1.5,
+    "edgeJitter": 0.35,
+    "edgeSegment": 1
+  },
+  "water": {
+    "side": "east",
+    "shore": 30,
+    "color": "#ffffff",
+    "texture": "assets/textures/water.png",
+    "opacity": 0.8,
+    "waveHeight": 0.01,
+    "jagged": 4,
+    "jaggedDetail": 1,
+    "sand": {
+      "width": 5,
+      "color": "#ffffff",
+      "texture": "assets/textures/sand.png",
+      "edgeJitter": 0.35,
+      "edgeSegment": 1
+    }
+  },
+  "mirage": {
+    "spots": [
+      [
+        -70,
+        12
+      ],
+      [
+        -95,
+        -22
+      ],
+      [
+        -115,
+        28
+      ],
+      [
+        -60,
+        -32
+      ],
+      [
+        -85,
+        5
+      ]
+    ],
+    "cycleMinutes": 10,
+    "visibleMinutes": 3,
+    "chanceBase": 0.35,
+    "chancePerPerception": 0.05,
+    "chanceMax": 0.9
+  },
+  "spawn": {
+    "x": 0,
+    "z": 8
+  },
+  "roads": [
+    {
+      "from": [
+        0,
+        20
+      ],
+      "to": [
+        0,
+        -20
+      ],
+      "width": 3
+    },
+    {
+      "from": [
+        -20,
+        0
+      ],
+      "to": [
+        20,
+        0
+      ],
+      "width": 3
+    },
+    {
+      "from": [
+        0,
+        -8
+      ],
+      "to": [
+        14,
+        -16
+      ],
+      "width": 2.2
+    },
+    {
+      "from": [
+        -14,
+        8
+      ],
+      "to": [
+        0,
+        8
+      ],
+      "width": 2.2
+    }
+  ],
+  "placements": [
+    {
+      "asset": "tower",
+      "x": 16,
+      "z": -17.5,
+      "rotY": 0
+    },
+    {
+      "asset": "lamp",
+      "x": 3,
+      "z": -2,
+      "rotY": 0
+    },
+    {
+      "asset": "lamp",
+      "x": -2,
+      "z": 2,
+      "rotY": 0
+    },
+    {
+      "asset": "lamp",
+      "x": -6,
+      "z": 8.2,
+      "rotY": 0
+    },
+    {
+      "asset": "lamp",
+      "x": 12.5,
+      "z": 2,
+      "rotY": 0
+    },
+    {
+      "asset": "tree_pine",
+      "x": -16,
+      "z": -16,
+      "rotY": 0
+    },
+    {
+      "asset": "tree_pine",
+      "x": -38.5,
+      "z": -16.5,
+      "rotY": 1,
+      "scale": 1.46
+    },
+    {
+      "asset": "tree_round",
+      "x": -18.5,
+      "z": 31,
+      "rotY": 0
+    },
+    {
+      "asset": "tree_pine",
+      "x": -14,
+      "z": 17,
+      "rotY": 2
+    },
+    {
+      "asset": "tree_round",
+      "x": 19,
+      "z": 20,
+      "rotY": 0
+    },
+    {
+      "asset": "tree_pine",
+      "x": 22,
+      "z": 15.5,
+      "rotY": 0.5
+    },
+    {
+      "asset": "tree_pine",
+      "x": 21,
+      "z": -4,
+      "rotY": 1.5
+    },
+    {
+      "asset": "tree_round",
+      "x": 12,
+      "z": 17,
+      "rotY": 0
+    },
+    {
+      "asset": "tree_pine",
+      "x": -18,
+      "z": -18.5,
+      "rotY": 0.8
+    },
+    {
+      "asset": "rock",
+      "x": 14,
+      "z": -6.5,
+      "rotY": 0.4
+    },
+    {
+      "asset": "rock",
+      "x": -12,
+      "z": 15,
+      "rotY": 2.2
+    },
+    {
+      "asset": "rock",
+      "x": -18,
+      "z": -5,
+      "rotY": 1.3
+    },
+    {
+      "asset": "rock",
+      "x": 28,
+      "z": 11.5,
+      "rotY": 0,
+      "scale": 1.77
+    },
+    {
+      "asset": "tree_round",
+      "x": -15.5,
+      "z": 33.5,
+      "rotY": 0
+    },
+    {
+      "asset": "house_small",
+      "x": -5,
+      "z": 17,
+      "rotY": 4.73,
+      "scale": 3.14
+    },
+    {
+      "asset": "house_small",
+      "x": 18.5,
+      "z": 5.5,
+      "rotY": -6.26,
+      "scale": 3.14
+    },
+    {
+      "asset": "stall",
+      "x": 3.5,
+      "z": 4,
+      "rotY": -0.7,
+      "scale": 1.1
+    },
+    {
+      "asset": "stall",
+      "x": -4.32,
+      "z": 4.71,
+      "rotY": 0.44,
+      "scale": 1.1
+    },
+    {
+      "asset": "shop_small",
+      "x": 6,
+      "z": -5.5,
+      "rotY": 7.85,
+      "scale": 1.77
+    },
+    {
+      "asset": "well",
+      "x": 0,
+      "z": 0,
+      "rotY": 0,
+      "scale": 1.77
+    },
+    {
+      "asset": "house_large",
+      "x": -18,
+      "z": 8,
+      "rotY": -1.56,
+      "scale": 2.36
+    },
+    {
+      "asset": "house_large",
+      "x": -13,
+      "z": -9,
+      "rotY": -2.08,
+      "scale": 2.36
+    },
+    {
+      "asset": "rosebush",
+      "x": -14.5,
+      "z": 6,
+      "rotY": 0
+    },
+    {
+      "asset": "rosebush",
+      "x": -14.5,
+      "z": 5,
+      "rotY": 0
+    },
+    {
+      "asset": "rosebush",
+      "x": -14.5,
+      "z": 10,
+      "rotY": 0
+    },
+    {
+      "asset": "rosebush",
+      "x": -14.5,
+      "z": 11,
+      "rotY": 0
+    },
+    {
+      "asset": "rosebush",
+      "x": -9.5,
+      "z": 6.5,
+      "rotY": 0
+    },
+    {
+      "asset": "rosebush",
+      "x": -11,
+      "z": 6.5,
+      "rotY": 0
+    },
+    {
+      "asset": "rosebush",
+      "x": -12.5,
+      "z": 6.5,
+      "rotY": 0
+    },
+    {
+      "asset": "rosebush",
+      "x": -12.5,
+      "z": 9.5,
+      "rotY": 0
+    },
+    {
+      "asset": "rosebush",
+      "x": -9.5,
+      "z": 9.5,
+      "rotY": 0
+    },
+    {
+      "asset": "rosebush",
+      "x": -11,
+      "z": 9.5,
+      "rotY": 0
+    },
+    {
+      "asset": "crate",
+      "x": 4,
+      "z": 6.5,
+      "rotY": 0.3
+    },
+    {
+      "asset": "crate",
+      "x": -8.5,
+      "z": -3,
+      "rotY": 1.1
+    },
+    {
+      "asset": "wall",
+      "x": 7.5,
+      "z": 27.5,
+      "rotY": 0,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall",
+      "x": -6.5,
+      "z": 27.5,
+      "rotY": 0,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall",
+      "x": -13.5,
+      "z": 26.5,
+      "rotY": -0.26,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall",
+      "x": 14.5,
+      "z": 26.5,
+      "rotY": 0.26,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall",
+      "x": -19.5,
+      "z": 25,
+      "rotY": -0.26,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall",
+      "x": 21,
+      "z": 24,
+      "rotY": 0.52,
+      "scale": 2.59
+    },
+    {
+      "asset": "fence",
+      "x": 9.5,
+      "z": -2,
+      "rotY": 0
+    },
+    {
+      "asset": "fence",
+      "x": 12,
+      "z": -2,
+      "rotY": 0
+    },
+    {
+      "asset": "fence",
+      "x": 14.5,
+      "z": -2,
+      "rotY": 0
+    },
+    {
+      "asset": "tavern",
+      "x": -6,
+      "z": -6,
+      "rotY": 0.6,
+      "scale": 1.33
+    },
+    {
+      "asset": "chest_wood",
+      "x": -43.5,
+      "z": -18,
+      "rotY": 0
+    },
+    {
+      "asset": "cattle_farm",
+      "x": -45.5,
+      "z": 30,
+      "rotY": 1.31,
+      "scale": 6.11
+    },
+    {
+      "asset": "wall_corner",
+      "x": -24,
+      "z": -25.5,
+      "rotY": 0,
+      "scale": 1.95
+    },
+    {
+      "asset": "wall",
+      "x": -27,
+      "z": 15.5,
+      "rotY": -1.31,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall",
+      "x": -26,
+      "z": 18.5,
+      "rotY": -1.31,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall",
+      "x": -28,
+      "z": 9,
+      "rotY": -1.57,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall",
+      "x": -28.5,
+      "z": -6.5,
+      "rotY": -1.57,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall",
+      "x": -25.5,
+      "z": -20.5,
+      "rotY": -1.83,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall",
+      "x": -27.5,
+      "z": -13.5,
+      "rotY": -1.83,
+      "scale": 2.59
+    },
+    {
+      "asset": "wall_corner",
+      "x": -24.5,
+      "z": 23.5,
+      "rotY": 0,
+      "scale": 1.95
+    },
+    {
+      "asset": "dock",
+      "x": 32.5,
+      "z": 0,
+      "rotY": -1.57,
+      "scale": 2.36,
+      "y": -0.6
+    },
+    {
+      "asset": "tree_pine",
+      "x": -43.5,
+      "z": -21.5,
+      "rotY": 1,
+      "scale": 1.46
+    },
+    {
+      "asset": "tree_pine",
+      "x": -48,
+      "z": -19,
+      "rotY": 1,
+      "scale": 1.46
+    },
+    {
+      "asset": "tree_pine",
+      "x": -46.5,
+      "z": -14,
+      "rotY": 1,
+      "scale": 1.46
+    },
+    {
+      "asset": "tree_pine",
+      "x": -53.5,
+      "z": -23.5,
+      "rotY": 1,
+      "scale": 1.46
+    },
+    {
+      "asset": "tree_round",
+      "x": -68,
+      "z": -18.5,
+      "rotY": 0,
+      "scale": 1.33
+    },
+    {
+      "asset": "tree_round",
+      "x": -76,
+      "z": -20,
+      "rotY": 0,
+      "scale": 1.33
+    },
+    {
+      "asset": "tree_round",
+      "x": -79,
+      "z": -28.5,
+      "rotY": -1.05,
+      "scale": 1.33
+    },
+    {
+      "asset": "tree_pine",
+      "x": -62.5,
+      "z": -26,
+      "rotY": 1,
+      "scale": 1.46
+    },
+    {
+      "asset": "tree_pine",
+      "x": -58.5,
+      "z": -20,
+      "rotY": 1,
+      "scale": 1.46
+    },
+    {
+      "asset": "tree_round",
+      "x": -34,
+      "z": -27.5,
+      "rotY": 0,
+      "scale": 1.33
+    },
+    {
+      "asset": "mirage",
+      "x": -99,
+      "z": -35,
+      "rotY": 0,
+      "scale": 1.21
+    },
+    {
+      "asset": "rock",
+      "x": -94.5,
+      "z": -38.5,
+      "rotY": -0.52,
+      "scale": 7.4
+    },
+    {
+      "asset": "rock",
+      "x": -103.5,
+      "z": -39.5,
+      "rotY": -0.52,
+      "scale": 11.91
+    },
+    {
+      "asset": "rock",
+      "x": -98.5,
+      "z": -41,
+      "rotY": 0,
+      "scale": 9.85
+    },
+    {
+      "asset": "rock",
+      "x": -103,
+      "z": -30,
+      "rotY": 0
+    },
+    {
+      "asset": "rock",
+      "x": -93.5,
+      "z": -33,
+      "rotY": 0,
+      "scale": 2.36
+    },
+    {
+      "asset": "rock",
+      "x": -106,
+      "z": -34,
+      "rotY": 0,
+      "scale": 2.85
+    },
+    {
+      "asset": "rock",
+      "x": -92.5,
+      "z": -28.5,
+      "rotY": 0
+    },
+    {
+      "asset": "rock",
+      "x": -103.5,
+      "z": -27.5,
+      "rotY": 0
+    },
+    {
+      "asset": "rock",
+      "x": -105,
+      "z": -27,
+      "rotY": 0
+    },
+    {
+      "asset": "rock",
+      "x": -103.5,
+      "z": -25,
+      "rotY": 0,
+      "scale": 0.62
+    },
+    {
+      "asset": "rock",
+      "x": -105,
+      "z": -23,
+      "rotY": 0
+    },
+    {
+      "asset": "rock",
+      "x": -104.5,
+      "z": -29,
+      "rotY": 0,
+      "scale": 1.46
+    },
+    {
+      "asset": "rock",
+      "x": -92,
+      "z": -44,
+      "rotY": 0.26,
+      "scale": 8.95
+    },
+    {
+      "asset": "rock",
+      "x": -94.5,
+      "z": -30,
+      "rotY": 0,
+      "scale": 1.46
+    }
+  ],
+  "npcs": [
+    {
+      "name": "Martena the Baker",
+      "asset": "char_npc",
+      "speed": 1.1,
+      "role": "Baker",
+      "grantsRole": "baker",
+      "joinDialogue": "Apron's behind the counter. We start before the sun does.",
+      "interactions": [
+        "talk",
+        "trade",
+        "quest",
+        "join"
+      ],
+      "dialogue": [
+        "Fresh loaves! Well... they were fresh this morning.",
+        "The mill's been quiet lately. Makes me nervous.",
+        "You look like you could use a honey bun, traveler."
+      ],
+      "path": [
+        [
+          -6,
+          8.2
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          3.2,
+          4.6
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "name": "Old Shea",
+      "asset": "char_npc",
+      "speed": 0.8,
+      "role": "Storyteller",
+      "interactions": [
+        "talk",
+        "quest"
+      ],
+      "dialogue": [
+        "These roads were dirt when I was a boy. Still are, come to think of it.",
+        "Don't go outside these walls after dark. Just don't.",
+        "I once saw a light in the hills that wasn't a lantern..."
+      ],
+      "path": [
+        [
+          8,
+          -8
+        ],
+        [
+          2,
+          -2
+        ],
+        [
+          -5,
+          -3.4
+        ],
+        [
+          -9,
+          -8
+        ],
+        [
+          -5,
+          -3.4
+        ],
+        [
+          2,
+          -2
+        ]
+      ]
+    },
+    {
+      "name": "Watchman Hale",
+      "asset": "char_guard",
+      "speed": 1.4,
+      "role": "City Watch",
+      "grantsRole": "watch",
+      "joinDialogue": "Raise your right hand. Good enough. Patrol starts at dusk, recruit.",
+      "interactions": [
+        "talk",
+        "quest",
+        "join"
+      ],
+      "dialogue": [
+        "Move along. Nothing to see here. Well — the well's nice.",
+        "Third night this week someone's reported lights near the tower.",
+        "Keep to the roads after sundown, citizen.",
+        "The Watch never sleeps. We do, however, take lunch."
+      ],
+      "path": [
+        [
+          0,
+          18
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          -14,
+          8
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          18,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -8
+        ],
+        [
+          14,
+          -16
+        ],
+        [
+          0,
+          -8
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          -18,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          18
+        ]
+      ]
+    },
+    {
+      "name": "Captain Brammel",
+      "asset": "char_npc",
+      "speed": 0.6,
+      "role": "Boat Captain",
+      "grantsRole": "fisherman",
+      "joinDialogue": "Ha! Another soul for the tide. Nets are by the crates — mind the gulls.",
+      "interactions": [
+        "talk",
+        "join"
+      ],
+      "dialogue": [
+        "The sea's been generous this season. Suspiciously generous.",
+        "Lost three lines to something big last week. BIG, I tell you.",
+        "A fisherman's rich in everything but coin, friend."
+      ],
+      "path": [
+        [
+          23,
+          8
+        ],
+        [
+          23,
+          0
+        ],
+        [
+          21,
+          -6
+        ],
+        [
+          23,
+          0
+        ]
+      ]
+    }
+  ]
+}

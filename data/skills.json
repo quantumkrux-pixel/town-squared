@@ -1,0 +1,47 @@
+{
+  "cooking": {
+    "name": "Cooking",
+    "icon": "assets/ui/skills/skill_cooking.png",
+    "desc": "Trained by completing the morning bake."
+  },
+  "fishing": {
+    "name": "Fishing",
+    "icon": "assets/ui/skills/skill_fishing.png",
+    "desc": "Trained by every catch — the day's target fish teaches most."
+  },
+  "perception": {
+    "name": "Perception",
+    "icon": "👁assets/ui/skills/skill_perception.png",
+    "desc": "Trained by finding and opening chests."
+  },
+  "endurance": {
+    "name": "Endurance",
+    "icon": "assets/ui/skills/skill_endurance.png",
+    "desc": "Trained by distance walked and finished patrols."
+  },
+  "intellect": {
+    "name": "Intellect",
+    "icon": "assets/ui/skills/skill_intellect.png",
+    "desc": "Trained by the whispers of the magick cave and the pages of lost books."
+  },
+  "speechcraft": {
+    "name": "Speech-Craft",
+    "icon": "assets/ui/skills/skill_speechcraft.png",
+    "desc": "Trained by conversing with the townsfolk."
+  },
+  "luck": {
+    "name": "Luck",
+    "icon": "assets/ui/skills/skill_luck.png",
+    "desc": "Trained by rare finds. Or is it the other way around?"
+  },
+  "strength": {
+    "name": "Strength",
+    "icon": "assets/ui/skills/skill_strength.png",
+    "desc": "Trained by the Watch's rounds."
+  },
+  "guile": {
+    "name": "Guile",
+    "icon": "assets/ui/skills/skill_guile.png",
+    "desc": "Trained by deeds not yet written."
+  }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a1512">
+<title>Town-Squared — a living town</title>
+<meta name="description" content="Town-Squared: a living, persistent fantasy town you share with everyone else in it. Join a trade, chase the mirage, mind the Watch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<nav>
+  <a class="wordmark" href="index.html">TOWN-SQUARED</a>
+  <a href="guide.html">New Player Guide</a>
+  <a href="journal.html">Dev Journal</a>
+  <a href="lore.html">Lore</a>
+  <a class="play-cta" href="play.html">PLAY</a>
+</nav>
+
+<main>
+  <section class="hero">
+    <h1>TOWN-SQUARED</h1>
+    <p class="tagline">A living town, shared with everyone in it. Join a trade, chase the mirage, mind the Watch.</p>
+    <a class="cta" href="play.html">ENTER THE TOWN</a>
+  </section>
+
+  <div class="rule"><span>❦ &nbsp;NOTEWORTHY NEWS &amp; UPDATES&nbsp; ❦</span></div>
+  <section id="news">
+    <div class="notice"><p>The town crier clears his throat…</p></div>
+  </section>
+
+  <div class="rule"><span>❦ &nbsp;THE TOWN RECORDS&nbsp; ❦</span></div>
+  <section class="cards">
+    <a class="card" href="guide.html">
+      <div class="c-icon">🗺️</div>
+      <h3>New Player Guide</h3>
+      <p>First day in town? Controls, professions, daily tasks, and where the chests hide.</p>
+    </a>
+    <a class="card" href="journal.html">
+      <div class="c-icon">✒️</div>
+      <h3>Development Journal</h3>
+      <p>What's being built, what's next, and the occasional honest note about what broke.</p>
+    </a>
+    <a class="card" href="lore.html">
+      <div class="c-icon">📜</div>
+      <h3>Lore</h3>
+      <p>Emberhollow's history, its people, and the lights in the hills that aren't lanterns.</p>
+    </a>
+  </section>
+</main>
+
+<footer>Town-Squared · a living town experiment</footer>
+
+<script type="module">
+  // News is data: edit data/news.json to post — never this file.
+  const el = document.getElementById('news');
+  try {
+    const res = await fetch('data/news.json');
+    const items = await res.json();
+    el.innerHTML = items.map(n => `
+      <div class="notice">
+        <div class="n-head">
+          <h3>${n.title}</h3>
+          <time>${new Date(n.date + 'T12:00').toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          ${n.tag ? `<span class="tag">${n.tag}</span>` : ''}
+        </div>
+        <p>${n.body}</p>
+      </div>`).join('');
+  } catch {
+    el.innerHTML = '<div class="notice"><p>The notice board is bare today. (data/news.json missing?)</p></div>';
+  }
+</script>
+</body>
+</html>

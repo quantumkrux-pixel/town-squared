@@ -1,0 +1,95 @@
+{
+  "coin": {
+    "name": "Gold Coin",
+    "icon": "🪙",
+    "stack": 999,
+    "desc": "The realm's favorite conversation starter."
+  },
+  "bread": {
+    "name": "Honey Bun",
+    "icon": "🥐",
+    "stack": 10,
+    "desc": "Still warm. Marta's finest."
+  },
+  "torch": {
+    "name": "Torch",
+    "icon": "🔥",
+    "stack": 5,
+    "desc": "Pushes back the dark. For a while."
+  },
+  "rope": {
+    "name": "Hempen Rope",
+    "icon": "🪢",
+    "stack": 3,
+    "desc": "Fifty feet. Everyone needs rope eventually."
+  },
+  "mysterious_key": {
+    "name": "Mysterious Key",
+    "icon": "🗝️",
+    "stack": 1,
+    "desc": "Old Fenwick won't say what it opens. He won't stop smiling, either."
+  },
+  "flour": {
+    "name": "Sack of Flour",
+    "icon": "🌾",
+    "stack": 5,
+    "desc": "Stone-ground. Gets everywhere."
+  },
+  "water": {
+    "name": "Waterskin",
+    "icon": "💧",
+    "stack": 5,
+    "desc": "Cold from the well. The good stuff."
+  },
+  "herring": {
+    "name": "Silver Herring",
+    "icon": "🐟",
+    "stack": 10,
+    "desc": "Small, quick, and everywhere — most days. Use it near a fire to cook.",
+    "cooksInto": "cooked_herring"
+  },
+  "bass": {
+    "name": "Harbor Bass",
+    "icon": "🐠",
+    "stack": 10,
+    "desc": "Puts up a fight. Worth it. Use it near a fire to cook.",
+    "cooksInto": "cooked_bass"
+  },
+  "perch": {
+    "name": "Rock Perch",
+    "icon": "🐡",
+    "stack": 10,
+    "desc": "Lurks near the stones. Suspicious of everything. Use it near a fire to cook.",
+    "cooksInto": "cooked_perch"
+  },
+  "old_boot": {
+    "name": "Old Boot",
+    "icon": "🥾",
+    "stack": 3,
+    "desc": "Not even a matching pair. The sea mocks you."
+  },
+  "cooked_herring": {
+    "name": "Smoked Herring",
+    "icon": "🍢",
+    "stack": 10,
+    "desc": "Golden and glistening. Worth the smoke in your eyes."
+  },
+  "cooked_bass": {
+    "name": "Grilled Bass",
+    "icon": "🥘",
+    "stack": 10,
+    "desc": "Crisp skin, flaky middle. Tavern-worthy."
+  },
+  "cooked_perch": {
+    "name": "Roasted Perch",
+    "icon": "🍲",
+    "stack": 10,
+    "desc": "Suspicious no more. Delicious now."
+  },
+  "rune_shard": {
+    "name": "Rune Shard",
+    "icon": "🔮",
+    "stack": 5,
+    "desc": "A splinter of somewhere else. It hums when the cave is near."
+  }
+}

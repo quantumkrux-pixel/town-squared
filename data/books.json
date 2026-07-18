@@ -1,0 +1,125 @@
+[
+  {
+    "id": "founding",
+    "title": "The Ring Around the Stone",
+    "author": "Town Records, Vol. I",
+    "x": 2, "z": -2,
+    "hint": "Where the town began.",
+    "text": [
+      "The well came first. This is agreed upon by every account, which should itself arouse suspicion — Emberhollow's accounts agree on nothing else.",
+      "The founders did not dig the well. They found it, already old, already cold, already sweet. The town grew around the water like a ring around a stone.",
+      "What the founders were doing this far from anywhere, the records decline to say."
+    ]
+  },
+  {
+    "id": "watch_charter",
+    "title": "Charter of the Night Watch",
+    "author": "Serjeant's Office",
+    "x": 15, "z": -11,
+    "hint": "Kept near the tower, where the Watch keeps its papers.",
+    "text": [
+      "Article One: The Watch shall walk the roads from dusk-bell to dawn-bell, without exception.",
+      "Article Two: Reports of lights, sounds, or persons beyond the north wall shall be filed in triplicate and acted upon never.",
+      "Article Three: Lunch is sacred.",
+      "A later hand has added, in the margin: 'Article Two was a mistake. We should have looked.'"
+    ]
+  },
+  {
+    "id": "millers_ledger",
+    "title": "The Miller's Last Ledger",
+    "author": "Unsigned",
+    "x": -8, "z": 7,
+    "hint": "Among the rosebushes, where the miller's garden stood.",
+    "text": [
+      "The final entries are ordinary. Sacks in, flour out, a note about a squeaking bearing.",
+      "The last line reads: 'Grinding stopped at midday. Not by my hand. Will inspect the stones tomorrow.'",
+      "There is no entry for tomorrow. The mill has been quiet since, and Martena buys her flour from a cart that comes at dawn and does not linger."
+    ]
+  },
+  {
+    "id": "sea_taxonomy",
+    "title": "A Taxonomy of Things With Teeth",
+    "author": "Capt. E. Brammel (annotated)",
+    "x": 22, "z": 3,
+    "hint": "The Captain reads on the shore between casts.",
+    "text": [
+      "A fisherman's guide to the local waters: herring (harmless), bass (spirited), perch (suspicious of everything, and rightly so).",
+      "The final chapter concerns a fourth thing, which takes lines, hooks, and on one occasion most of a net. The author has crossed out three proposed names for it.",
+      "The current annotation reads only: 'BIG. Generous lately. Why?'"
+    ]
+  },
+  {
+    "id": "shea_lights",
+    "title": "What I Saw From the Wall",
+    "author": "Shea, in a young hand",
+    "x": -3, "z": 26,
+    "hint": "Tucked by the northern walls, where a boy once kept lookout.",
+    "text": [
+      "I counted nine lights in the hills tonight. Lanterns swing when a man walks. These did not swing.",
+      "They moved the way the water moves under ice — slow, and certain, and underneath.",
+      "Da says never mind the lights. Da says a lot of things in a voice that means he has seen them too."
+    ]
+  },
+  {
+    "id": "cave_fragment",
+    "title": "Fragment: On the Door That Walks",
+    "author": "Torn from a larger work",
+    "x": -32, "z": 20,
+    "hint": "The western fields keep what the cave discards.",
+    "text": [
+      "…is not a cave at all, in the sense that a cave is a place. It is better understood as a visit.",
+      "It favors the observant. This is not kindness. A door prefers to be seen by those who might open it.",
+      "The shards it gives are pieces of somewhere else. Collect enough, and the somewhere else may notice the collection…",
+      "The remainder of the page is burned."
+    ]
+  },
+  {
+    "id": "tavern_songs",
+    "title": "Songs Nobody Wrote",
+    "author": "Collected at the tavern",
+    "x": -6, "z": -8,
+    "hint": "Where songs are sung and tabs are forgotten.",
+    "text": [
+      "Every town has songs older than its memory. Emberhollow's are stranger than most.",
+      "There is the one about the wedding at the bottom of the well. The one that counts backward from nine and stops at four. The one about the miller's tomorrow.",
+      "Sung together, in order, they are said to make a fourth song. The tavern keeps them out of order on purpose."
+    ]
+  },
+  {
+    "id": "bakers_almanac",
+    "title": "The Baker's Almanac",
+    "author": "Passed hand to hand",
+    "x": 3, "z": 5,
+    "hint": "Near the market stalls, dusted with flour.",
+    "text": [
+      "Rise before the sun; the dough forgives nothing.",
+      "Well-water only. Cart-flour is fine, whatever anyone implies about the cart.",
+      "A margin note in Martena's hand: 'The almanac is wrong about only one thing. The dough forgives everything. That's why we make it.'"
+    ]
+  },
+  {
+    "id": "wall_inventory",
+    "title": "Inventory of the North Wall",
+    "author": "Mason's Guild",
+    "x": 8, "z": 24,
+    "hint": "The masons left more than stone at the wall.",
+    "text": [
+      "Stones: four thousand and change. Mortar: sufficient. Gates: none.",
+      "The absence of gates was deliberate and is the only line item marked PAID IN FULL twice.",
+      "The guild's final invoice includes a charge for 'facing the stones inward,' which no mason interviewed since will explain."
+    ]
+  },
+  {
+    "id": "runes_primer",
+    "title": "A Child's Primer of Runes",
+    "author": "Author unknown, edition unknown",
+    "x": -20, "z": -14,
+    "hint": "Lost among the pines, where children were told not to play.",
+    "text": [
+      "The first rune means WATER and is safe to draw.",
+      "The second rune means DOOR and should be drawn only in daylight.",
+      "The third rune means the thing that is drawn on the shards. Do not draw the third rune. This primer will not show you the third rune.",
+      "The rest of the primer is, of course, blank."
+    ]
+  }
+]

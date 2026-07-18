@@ -1,0 +1,33 @@
+{
+  "watch": {
+    "type": "patrol",
+    "name": "Evening Rounds",
+    "desc": "Check every watch-point before the sand runs out.",
+    "points": [[0, 18], [18, 0], [14, -16], [-18, 0]],
+    "radius": 2.5,
+    "timeLimitSec": 240,
+    "reward": { "coin": 15, "rep": 10 }
+  },
+  "baker": {
+    "type": "gather",
+    "name": "The Morning Bake",
+    "desc": "Flour, water, fire — in that order.",
+    "steps": [
+      { "label": "Collect flour at the old millhouse", "x": -8, "z": 5,   "radius": 2.8, "give": "flour" },
+      { "label": "Draw water from the well",           "x": 0,  "z": 0,   "radius": 2.4, "give": "water" },
+      { "label": "Bake at the market stall",           "x": 3.2, "z": 4.6, "radius": 2.8, "take": ["flour", "water"], "give": "bread" }
+    ],
+    "reward": { "coin": 12, "rep": 8 }
+  },
+  "fisherman": {
+    "type": "fish",
+    "name": "The Daily Catch",
+    "desc": "The tide decides what bites today.",
+    "fishPool": ["herring", "bass", "perch"],
+    "count": 3,
+    "castSeconds": [2, 5],
+    "junkChance": 0.25,
+    "nearWaterM": 4,
+    "reward": { "coin": 18, "rep": 10 }
+  }
+}

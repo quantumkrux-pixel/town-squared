@@ -1,0 +1,17 @@
+{
+  "baker": {
+    "name": "Baker",
+    "icon": "🍞",
+    "desc": "Warm hands, flour everywhere. Keeper of the morning loaves."
+  },
+  "watch": {
+    "name": "City Watch",
+    "icon": "🛡️",
+    "desc": "Sworn to keep Emberhollow's roads safe after sundown."
+  },
+  "fisherman": {
+    "name": "Fisherman",
+    "icon": "🎣",
+    "desc": "Salt, patience, and the tide. The sea provides — eventually."
+  }
+}

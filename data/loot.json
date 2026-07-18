@@ -1,0 +1,85 @@
+{
+  "_pool": {
+    "respawnEveryMinutes": 3
+  },
+  "common": {
+    "rolls": [
+      1,
+      3
+    ],
+    "entries": [
+      {
+        "item": "coin",
+        "weight": 6,
+        "qty": [
+          2,
+          8
+        ]
+      },
+      {
+        "item": "bread",
+        "weight": 3,
+        "qty": [
+          1,
+          2
+        ]
+      },
+      {
+        "item": "rope",
+        "weight": 2,
+        "qty": [
+          1,
+          1
+        ]
+      },
+      {
+        "item": "torch",
+        "weight": 2,
+        "qty": [
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  "rare": {
+    "rolls": [
+      2,
+      4
+    ],
+    "entries": [
+      {
+        "item": "coin",
+        "weight": 5,
+        "qty": [
+          10,
+          25
+        ]
+      },
+      {
+        "item": "torch",
+        "weight": 2,
+        "qty": [
+          1,
+          2
+        ]
+      },
+      {
+        "item": "rope",
+        "weight": 2,
+        "qty": [
+          1,
+          2
+        ]
+      },
+      {
+        "item": "mysterious_key",
+        "weight": 1,
+        "qty": [
+          1,
+          1
+        ]
+      }
+    ]
+  }
+}
