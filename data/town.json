@@ -187,8 +187,8 @@
     },
     {
       "asset": "tree_round",
-      "x": 12,
-      "z": 17,
+      "x": 14.5,
+      "z": 23.5,
       "rotY": 0
     },
     {
@@ -279,8 +279,8 @@
     },
     {
       "asset": "house_large",
-      "x": -13,
-      "z": -9,
+      "x": 8.5,
+      "z": 15,
       "rotY": -2.08,
       "scale": 2.36
     },
@@ -836,7 +836,7 @@
       ]
     },
     {
-      "name": "Captain Bremerton",
+      "name": "Captain Brammel",
       "asset": "char_npc",
       "speed": 0.6,
       "role": "Boat Captain",
