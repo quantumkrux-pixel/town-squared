@@ -235,6 +235,19 @@ function buildFenceSegment() {
   return g;
 }
 
+function buildFenceSegment2() {
+  const g = new THREE.Group();
+  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
+  const awn = box(2.8, 0.08, 1.8, C.woodDark, 1.1, 1.0, -0.5);
+  awn.rotation.x = -0.18;
+  g.add(awn);
+  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
+  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
+  return g;
+}
+
 function buildDock() {
   const g = new THREE.Group();
   g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
@@ -379,6 +392,7 @@ export const ASSET_DEFS = {
   well:        { url: 'assets/models/well.glb', build: buildWell,       footprint: 2.0,  collider: 1.1 },
   stall:       { url: 'assets/models/shop_stall.glb', build: buildStall,      footprint: 2.8,  collider: 1.4 },
   fence:       { url: 'assets/models/fence_segment.glb', build: buildFenceSegment,      footprint: 2.8,  collider: 1.4 },
+    fence2:       { url: 'assets/models/fence_2.glb', build: buildFenceSegment2,      footprint: 2.8,  collider: 1.4 },
   dock:       { url: 'assets/models/dock.glb', build: buildDock,      footprint: 2.8, },
   wall:       { url: 'assets/models/wall.glb', build: buildWall,      footprint: 2.8,  collider: 1.4 },  
   stone_face:       { url: 'assets/models/stone_exterior.glb', build: buildStoneFace,      footprint: 2.8,  collider: 1.4 },
