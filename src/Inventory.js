@@ -110,7 +110,8 @@ const PANEL_CSS = `
 `;
 
 export class Inventory {
-  constructor() {
+  constructor(server = null) {
+    this.server = server;          // ServerCharacter, or null (offline/local)
     this.itemDefs = {};
     this.slots = new Array(ART.cols * ART.rows).fill(null); // {id, qty} | null
     this.selectedSlot = -1;
@@ -133,15 +134,47 @@ export class Inventory {
       if (res.ok) this.itemDefs = await res.json();
     } catch { /* no item defs — inventory still functions */ }
 
-    if (!this.loadJSON(localStorage.getItem(STORAGE_KEY))) {
-      // starter kit
+    if (this.server) {
+      // authoritative: quantities come from the server; slots are a VIEW
+      this.server.onChange(() => this._rebuildFromServer());
+      this._rebuildFromServer();
+    } else if (!this.loadJSON(localStorage.getItem(STORAGE_KEY))) {
+      // offline/local starter kit (unchanged behavior when no server)
       this.add('coin', 12);
       this.add('torch', 1);
     }
     this._render();
   }
 
+  /** Rebuild the slot view from the server's authoritative item map,
+   *  respecting per-item stack sizes so the grid still looks right. */
+  _rebuildFromServer() {
+    this.slots = new Array(ART.cols * ART.rows).fill(null);
+    let i = 0;
+    for (const [id, qty] of Object.entries(this.server.inventory)) {
+      const stack = this.itemDefs[id]?.stack ?? 1;
+      let left = qty;
+      while (left > 0 && i < this.slots.length) {
+        const take = Math.min(left, stack);
+        this.slots[i++] = { id, qty: take };
+        left -= take;
+      }
+    }
+    this._render();
+    this.onChange();
+  }
+
   // ---------------- core API ----------------
+  // In SERVER mode, `count` reflects authoritative server quantities and
+  // add/remove are LOCAL view-only (used for optimistic display) — real
+  // grants happen server-side (open-chest writes items; claim_task grants
+  // rewards) and arrive via the server's onChange → _rebuildFromServer.
+  // In LOCAL mode they mutate the slots directly, as before.
+  count(id) {
+    if (this.server) return this.server.count(id);
+    return this.slots.reduce((n, s) => n + (s?.id === id ? s.qty : 0), 0);
+  }
+
   add(id, qty = 1) {
     const def = this.itemDefs[id] ?? { stack: 1 };
     let remaining = qty;
@@ -180,10 +213,6 @@ export class Inventory {
     return true;
   }
 
-  count(id) {
-    return this.slots.reduce((n, s) => n + (s?.id === id ? s.qty : 0), 0);
-  }
-
   // ---------------- persistence ----------------
   toJSON() {
     return JSON.stringify(this.slots);
@@ -199,7 +228,7 @@ export class Inventory {
     } catch { return false; }
   }
   _afterChange() {
-    localStorage.setItem(STORAGE_KEY, this.toJSON());
+    if (!this.server) localStorage.setItem(STORAGE_KEY, this.toJSON());
     this._render();
     this.onChange();
   }

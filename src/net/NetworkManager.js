@@ -48,8 +48,8 @@ class BaseNetwork {
 // ---------------------------------------------------------------
 export class SupabaseNetwork extends BaseNetwork {
   async connect() {
-    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-    this.client = createClient(this.cfg.SUPABASE_URL, this.cfg.SUPABASE_ANON_KEY);
+    const { getSupabase } = await import('./supa.js');
+    this.client = await getSupabase(this.cfg);
     this._peers = new Set();
 
     this.channel = this.client.channel(this.cfg.ROOM, {

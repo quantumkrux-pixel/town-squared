@@ -298,12 +298,15 @@ export class Containers {
 
   _takeAll() {
     if (!this.current) return;
-    for (const { id, qty } of this.current.loot) this.inventory.add(id, qty);
-    // opening chests sharpens the eyes; rare finds feed fortune
-    this.skills?.addXp('perception', 10);
-    if (this.current.loot.some(l => l.id === 'mysterious_key')) this.skills?.addXp('luck', 40);
+    // In server mode the items were ALREADY granted by the open-chest
+    // function (authoritative) and arrive via the inventory's realtime
+    // feed — adding here too would double-count. Only grant locally when
+    // offline. Perception/luck XP likewise route through the server when
+    // authoritative (see skills wiring); offline they apply locally.
     if (!this.serverMode) {
-      // offline: despawning is our job (server mode: already claimed)
+      for (const { id, qty } of this.current.loot) this.inventory.add(id, qty);
+      this.skills?.addXp('perception', 10);
+      if (this.current.loot.some(l => l.id === 'mysterious_key')) this.skills?.addXp('luck', 40);
       this._despawn(this.current.rec, this.current.key);
     }
     this.current = null;

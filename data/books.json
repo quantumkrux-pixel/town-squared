@@ -3,7 +3,8 @@
     "id": "founding",
     "title": "The Ring Around the Stone",
     "author": "Town Records, Vol. I",
-    "x": 2, "z": -2,
+    "x": 2,
+    "z": -2,
     "hint": "Where the town began.",
     "text": [
       "The well came first. This is agreed upon by every account, which should itself arouse suspicion — Emberhollow's accounts agree on nothing else.",
@@ -15,7 +16,8 @@
     "id": "watch_charter",
     "title": "Charter of the Night Watch",
     "author": "Serjeant's Office",
-    "x": 15, "z": -11,
+    "x": 15,
+    "z": -11,
     "hint": "Kept near the tower, where the Watch keeps its papers.",
     "text": [
       "Article One: The Watch shall walk the roads from dusk-bell to dawn-bell, without exception.",
@@ -28,7 +30,8 @@
     "id": "millers_ledger",
     "title": "The Miller's Last Ledger",
     "author": "Unsigned",
-    "x": -8, "z": 7,
+    "x": -8,
+    "z": 7,
     "hint": "Among the rosebushes, where the miller's garden stood.",
     "text": [
       "The final entries are ordinary. Sacks in, flour out, a note about a squeaking bearing.",
@@ -40,7 +43,8 @@
     "id": "sea_taxonomy",
     "title": "A Taxonomy of Things With Teeth",
     "author": "Capt. E. Brammel (annotated)",
-    "x": 22, "z": 3,
+    "x": 22,
+    "z": 3,
     "hint": "The Captain reads on the shore between casts.",
     "text": [
       "A fisherman's guide to the local waters: herring (harmless), bass (spirited), perch (suspicious of everything, and rightly so).",
@@ -52,7 +56,8 @@
     "id": "shea_lights",
     "title": "What I Saw From the Wall",
     "author": "Shea, in a young hand",
-    "x": -3, "z": 26,
+    "x": -3,
+    "z": 26,
     "hint": "Tucked by the northern walls, where a boy once kept lookout.",
     "text": [
       "I counted nine lights in the hills tonight. Lanterns swing when a man walks. These did not swing.",
@@ -64,7 +69,8 @@
     "id": "cave_fragment",
     "title": "Fragment: On the Door That Walks",
     "author": "Torn from a larger work",
-    "x": -32, "z": 20,
+    "x": -32,
+    "z": 20,
     "hint": "The western fields keep what the cave discards.",
     "text": [
       "…is not a cave at all, in the sense that a cave is a place. It is better understood as a visit.",
@@ -77,7 +83,8 @@
     "id": "tavern_songs",
     "title": "Songs Nobody Wrote",
     "author": "Collected at the tavern",
-    "x": -6, "z": -8,
+    "x": -6,
+    "z": -8,
     "hint": "Where songs are sung and tabs are forgotten.",
     "text": [
       "Every town has songs older than its memory. Emberhollow's are stranger than most.",
@@ -89,7 +96,8 @@
     "id": "bakers_almanac",
     "title": "The Baker's Almanac",
     "author": "Passed hand to hand",
-    "x": 3, "z": 5,
+    "x": 3,
+    "z": 5,
     "hint": "Near the market stalls, dusted with flour.",
     "text": [
       "Rise before the sun; the dough forgives nothing.",
@@ -101,7 +109,8 @@
     "id": "wall_inventory",
     "title": "Inventory of the North Wall",
     "author": "Mason's Guild",
-    "x": 8, "z": 24,
+    "x": 8,
+    "z": 24,
     "hint": "The masons left more than stone at the wall.",
     "text": [
       "Stones: four thousand and change. Mortar: sufficient. Gates: none.",
@@ -113,7 +122,8 @@
     "id": "runes_primer",
     "title": "A Child's Primer of Runes",
     "author": "Author unknown, edition unknown",
-    "x": -20, "z": -14,
+    "x": -20,
+    "z": -14,
     "hint": "Lost among the pines, where children were told not to play.",
     "text": [
       "The first rune means WATER and is safe to draw.",

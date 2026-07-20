@@ -58,10 +58,22 @@ export class Player {
   /** Update the nametag to show a profession, e.g. "Wren Ashfoot · Baker". */
   setRole(roleId, roleName) {
     this.roleId = roleId ?? '';
+    this._roleName = roleName ?? '';
+    this._rebuildTag();
+  }
+
+  /** Rename the player, preserving any current profession on the tag. */
+  setName(name) {
+    if (!name) return;
+    this.name = name;
+    this._rebuildTag();
+  }
+
+  _rebuildTag() {
     this.mesh.remove(this._tag);
     this._tag.material.map?.dispose();
     this._tag.material.dispose();
-    this._tag = makeNameTag(roleName ? `${this.name} · ${roleName}` : this.name);
+    this._tag = makeNameTag(this._roleName ? `${this.name} · ${this._roleName}` : this.name);
     this.mesh.add(this._tag);
   }
 

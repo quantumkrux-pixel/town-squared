@@ -22,6 +22,9 @@ import { Mirage } from './Mirage.js';
 import { MapView } from './MapView.js';
 import { PlayerCard } from './PlayerCard.js';
 import { Bibliofolio } from './Bibliofolio.js';
+import { Auth } from './Auth.js';
+import { Profile } from './Profile.js';
+import { Friends } from './Friends.js';
 
 const canvas = document.getElementById('game');
 const netDot = document.getElementById('netDot');
@@ -124,7 +127,12 @@ async function boot() {
 
   editor = new Editor({ world, registry, camera, rig, canvas });
 
-  const identity = { id: crypto.randomUUID(), name: randomName() };
+  // persistent identity: anonymous auth gives a durable id that survives
+  // refresh (offline → a stable localStorage uuid). Profiles and friends
+  // both stand on this.
+  const auth = new Auth(CONFIG);
+  const identity = await auth.init();
+  if (!identity.name) identity.name = randomName();
 
   roles = new Roles();
   await roles.init();
@@ -177,6 +185,21 @@ async function boot() {
   biblio.setCamera(camera);
   editor.setBibliofolio(biblio);
 
+  // ---- persistent character ----
+  // Load the server profile (if online) and hydrate skills, inventory,
+  // books, and name from it — otherwise the localStorage each system
+  // already loaded stands. Then push changes back, debounced.
+  const profile = new Profile({ auth, cfg: CONFIG, skills, inventory, biblio });
+  await profile.init(identity);
+  // any XP, item, or book change schedules a save
+  const _sk = skills.addXp.bind(skills); skills.addXp = (id, n) => { _sk(id, n); profile.save(); };
+  const _iadd = inventory.add.bind(inventory); inventory.add = (id, n) => { const r = _iadd(id, n); profile.save(); return r; };
+  const _irem = inventory.remove.bind(inventory); inventory.remove = (id, n) => { const r = _irem(id, n); profile.save(); return r; };
+  const _bcol = biblio.collect.bind(biblio); biblio.collect = (b) => { _bcol(b); profile.save(); };
+  // save on the way out
+  window.addEventListener('pagehide', () => profile.flushNow());
+  document.addEventListener('visibilitychange', () => { if (document.hidden) profile.flushNow(); });
+
   roles.onChange = (def) => {
     player?.setRole(roles.current, def?.name);
     tasks.setRole(roles.current);
@@ -218,6 +241,17 @@ async function boot() {
   net = createNetwork(CONFIG, identity);
   net.onPeerState = (id, name, s, t) => remotes.onState(id, name, s, t);
   net.onPeerLeave = (id) => remotes.onLeave(id);
+
+  // friends + chat (online only; hidden offline). Online dots come from
+  // whoever we can currently see in the world (remote peers).
+  const friends = new Friends({
+    auth, cfg: CONFIG, identity,
+    roster: () => new Set(remotes.peers.keys()),
+  });
+  await friends.init();
+
+  // renaming yourself updates the nametag and persists
+  profile.onName(name => player?.setName?.(name));
   net.onStatus = (label, mode) => {
     netLabel.textContent = label;
     netDot.className = `dot ${mode}`;
