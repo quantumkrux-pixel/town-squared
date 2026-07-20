@@ -16,8 +16,8 @@
     "id": "watch_charter",
     "title": "Charter of the Night Watch",
     "author": "Serjeant's Office",
-    "x": 15,
-    "z": -11,
+    "x": 28.5,
+    "z": -37,
     "hint": "Kept near the tower, where the Watch keeps its papers.",
     "text": [
       "Article One: The Watch shall walk the roads from dusk-bell to dawn-bell, without exception.",
@@ -30,8 +30,8 @@
     "id": "millers_ledger",
     "title": "The Miller's Last Ledger",
     "author": "Unsigned",
-    "x": -8,
-    "z": 7,
+    "x": -43.5,
+    "z": 6.5,
     "hint": "Among the rosebushes, where the miller's garden stood.",
     "text": [
       "The final entries are ordinary. Sacks in, flour out, a note about a squeaking bearing.",
@@ -122,8 +122,8 @@
     "id": "runes_primer",
     "title": "A Child's Primer of Runes",
     "author": "Author unknown, edition unknown",
-    "x": -20,
-    "z": -14,
+    "x": -27,
+    "z": -31,
     "hint": "Lost among the pines, where children were told not to play.",
     "text": [
       "The first rune means WATER and is safe to draw.",
