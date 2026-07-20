@@ -572,83 +572,177 @@
     },
     {
       "asset": "mirage",
-      "x": -99,
-      "z": -35,
+      "x": -94.5,
+      "z": -42,
       "rotY": 0,
       "scale": 1.21
     },
     {
       "asset": "rock",
-      "x": -103,
-      "z": -30,
+      "x": -100,
+      "z": -33.5,
       "rotY": 0
     },
     {
       "asset": "rock",
-      "x": -93.5,
-      "z": -33,
+      "x": -89.5,
+      "z": -38,
       "rotY": 0,
       "scale": 2.36
     },
     {
       "asset": "rock",
-      "x": -106,
-      "z": -34,
+      "x": -98.5,
+      "z": -36,
       "rotY": 0,
       "scale": 2.85
     },
     {
       "asset": "rock",
-      "x": -92.5,
+      "x": -90,
+      "z": -31.5,
+      "rotY": 0
+    },
+    {
+      "asset": "rock",
+      "x": -99,
+      "z": -30.5,
+      "rotY": 0
+    },
+    {
+      "asset": "rock",
+      "x": -101,
       "z": -28.5,
       "rotY": 0
     },
     {
       "asset": "rock",
-      "x": -103.5,
-      "z": -27.5,
-      "rotY": 0
-    },
-    {
-      "asset": "rock",
-      "x": -105,
+      "x": -101.5,
       "z": -27,
-      "rotY": 0
-    },
-    {
-      "asset": "rock",
-      "x": -103.5,
-      "z": -25,
       "rotY": 0,
       "scale": 0.62
     },
     {
       "asset": "rock",
-      "x": -105,
-      "z": -23,
+      "x": -99.5,
+      "z": -27,
       "rotY": 0
     },
     {
       "asset": "rock",
-      "x": -104.5,
-      "z": -29,
+      "x": -101,
+      "z": -39,
       "rotY": 0,
       "scale": 1.46
     },
     {
       "asset": "rock",
-      "x": -94.5,
-      "z": -30,
+      "x": -88.5,
+      "z": -35,
       "rotY": 0,
       "scale": 1.46
     },
     {
       "asset": "blacksmith",
-      "x": -8,
-      "z": -18,
+      "x": -10,
+      "z": -20.5,
       "rotY": 1.57,
       "scale": 2.85,
       "y": -0.2
+    },
+    {
+      "asset": "fence2",
+      "x": -2,
+      "z": -21.5,
+      "rotY": 1.57,
+      "scale": 1.77
+    },
+    {
+      "asset": "fence2",
+      "x": -2,
+      "z": -15.5,
+      "rotY": 1.57,
+      "scale": 1.77
+    },
+    {
+      "asset": "fence2",
+      "x": -4.5,
+      "z": -13,
+      "rotY": 3.14,
+      "scale": 1.77
+    },
+    {
+      "asset": "fence2",
+      "x": -9.5,
+      "z": -13,
+      "rotY": 3.14,
+      "scale": 1.77
+    },
+    {
+      "asset": "fence2",
+      "x": 4.5,
+      "z": -12.5,
+      "rotY": 3.67,
+      "scale": 1.77
+    },
+    {
+      "asset": "fence2",
+      "x": 10.5,
+      "z": -16,
+      "rotY": 3.67,
+      "scale": 1.77
+    },
+    {
+      "asset": "stone_face",
+      "x": -90.5,
+      "z": -45,
+      "rotY": 2.09,
+      "scale": 2.59
+    },
+    {
+      "asset": "stone_face",
+      "x": -99,
+      "z": -44,
+      "rotY": 1.31,
+      "scale": 2.59
+    },
+    {
+      "asset": "stone_face",
+      "x": -95,
+      "z": -44.5,
+      "rotY": -4.71,
+      "scale": 2.14,
+      "y": 3.4
+    },
+    {
+      "asset": "stone_face",
+      "x": -91.5,
+      "z": -45,
+      "rotY": 2.36,
+      "scale": 1.95,
+      "y": 3.1
+    },
+    {
+      "asset": "stone_face",
+      "x": -99.5,
+      "z": -44.5,
+      "rotY": 4.19,
+      "scale": 1.77,
+      "y": 3.3
+    },
+    {
+      "asset": "stone_face",
+      "x": -105,
+      "z": -45,
+      "rotY": 1.05,
+      "scale": 2.59
+    },
+    {
+      "asset": "tree_round",
+      "x": -113,
+      "z": -29.5,
+      "rotY": 0,
+      "scale": 1.33
     }
   ],
   "npcs": [
