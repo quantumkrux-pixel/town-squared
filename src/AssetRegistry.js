@@ -196,6 +196,19 @@ function buildWall() {
   return g;
 }
 
+function buildStoneFace() {
+  const g = new THREE.Group();
+  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
+  const awn = box(2.8, 0.08, 1.8, C.cloth, 0, 2.05, 0.1);
+  awn.rotation.x = -0.18;
+  g.add(awn);
+  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
+  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
+  return g;
+}
+
 function buildWallCorner() {
   const g = new THREE.Group();
   g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
@@ -367,7 +380,9 @@ export const ASSET_DEFS = {
   stall:       { url: 'assets/models/shop_stall.glb', build: buildStall,      footprint: 2.8,  collider: 1.4 },
   fence:       { url: 'assets/models/fence_segment.glb', build: buildFenceSegment,      footprint: 2.8,  collider: 1.4 },
   dock:       { url: 'assets/models/dock.glb', build: buildDock,      footprint: 2.8, },
-  wall:       { url: 'assets/models/wall.glb', build: buildWall,      footprint: 2.8,  collider: 1.4 },
+  wall:       { url: 'assets/models/wall.glb', build: buildWall,      footprint: 2.8,  collider: 1.4 },  
+  stone_face:       { url: 'assets/models/stone_exterior.glb', build: buildStoneFace,      footprint: 2.8,  collider: 1.4 },
+  
     wall_corner:  { url: 'assets/models/wall_corner_round.glb', build: buildWallCorner,    footprint: 2.5, collider: 0.55 },
   tree_pine:   { url: null, build: buildTree,       footprint: 2.2,  collider: 0.4 },
   tree_round:  { url: null, build: buildTreeRound,  footprint: 2.3,  collider: 0.4 },
