@@ -139,6 +139,19 @@ function buildShopSmall() {
   return g;
 }
 
+function buildBlacksmith() {
+  const g = new THREE.Group();
+  g.add(box(5.5, 3.0, 4.2, C.wood, 0, 1.5, 0));
+  g.add(box(5.7, 0.3, 4.4, C.woodDark, 0, 3.0, 0));
+  g.add(roof(5.5, 2.1, 4.2, C.roofPurple, 3.15));
+  g.add(box(1.1, 1.6, 0.12, C.woodDark, 0, 0.8, 2.14));
+  // hanging sign
+  g.add(box(1.4, 0.08, 0.08, C.woodDark, 2.2, 2.5, 2.35));
+  g.add(box(0.9, 0.6, 0.06, C.gold, 2.4, 2.05, 2.35));
+  g.add(cyl(0.3, 0.3, 1.8, C.stoneDark, -2.0, 4.0, -1.2, 6));
+  return g;
+}
+
 function buildTower() {
   const g = new THREE.Group();
   g.add(cyl(1.5, 1.8, 6.5, C.stone, 0, 3.25, 0, 10));
@@ -348,6 +361,7 @@ export const ASSET_DEFS = {
   house_large: { url: 'assets/models/house_large.glb', build: buildHouseLarge, footprint: 4.8,  collider: 2.6 },
   tavern:      { url: 'assets/models/tavern.glb', build: buildTavern,     footprint: 5.8,  collider: 3.2 },
   shop_small: { url: 'assets/models/shop_small.glb', build: buildShopSmall, footprint: 3.4,  collider: 2.0 },
+    blacksmith: { url: 'assets/models/blacksmith_shop.glb', build: buildBlacksmith, footprint: 3.4,  collider: 2.0 },
   tower:       { url: null, build: buildTower,      footprint: 3.8,  collider: 2.0 },
   well:        { url: 'assets/models/well.glb', build: buildWell,       footprint: 2.0,  collider: 1.1 },
   stall:       { url: 'assets/models/shop_stall.glb', build: buildStall,      footprint: 2.8,  collider: 1.4 },
