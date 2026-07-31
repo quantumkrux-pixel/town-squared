@@ -83,8 +83,7 @@
         0
       ],
       "to": [
-        20
-      ,
+        20,
         0
       ],
       "width": 3
@@ -432,9 +431,9 @@
     },
     {
       "asset": "cattle_farm",
-      "x": -45.5,
-      "z": 30,
-      "rotY": 1.31,
+      "x": -51.5,
+      "z": 30.5,
+      "rotY": 3.06,
       "scale": 6.11
     },
     {
@@ -744,6 +743,110 @@
       "z": -29.5,
       "rotY": 0,
       "scale": 1.33
+    },
+    {
+      "asset": "farm_plot",
+      "x": -43,
+      "z": 16,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -47,
+      "z": 16,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -45,
+      "z": 16,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -48.5,
+      "z": 12,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -44.5,
+      "z": 12,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -46.5,
+      "z": 12,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -53,
+      "z": 16,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -55,
+      "z": 16,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -57,
+      "z": 16,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -54.5,
+      "z": 12,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -56.5,
+      "z": 12,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -58.5,
+      "z": 12,
+      "rotY": 0
+    },
+    {
+      "asset": "fence2",
+      "x": -38.5,
+      "z": 6,
+      "rotY": 0,
+      "scale": 1.77,
+      "y": 0.1
+    },
+    {
+      "asset": "fence2",
+      "x": -45,
+      "z": 6,
+      "rotY": 0,
+      "scale": 1.77,
+      "y": 0.1
+    },
+    {
+      "asset": "fence2",
+      "x": -51.5,
+      "z": 6,
+      "rotY": 0,
+      "scale": 1.77,
+      "y": 0.1
+    },
+    {
+      "asset": "fence2",
+      "x": -58,
+      "z": 6,
+      "rotY": 0,
+      "scale": 1.77,
+      "y": 0.1
     }
   ],
   "npcs": [
