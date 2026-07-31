@@ -76,11 +76,12 @@ const CSS = `
 `;
 
 export class Tasks {
-  constructor({ world, inventory, roles, skills }) {
+  constructor({ world, inventory, roles, skills, server }) {
     this.world = world;
     this.inventory = inventory;
     this.roles = roles;
     this.skills = skills ?? null;
+    this.server = server ?? null;
     this.defs = {};
     this.state = null;      // { day, roleId, status, stepIdx, caught, endsAt, fishId }
     this.rep = +(localStorage.getItem(REP_KEY) ?? 0);
@@ -88,6 +89,11 @@ export class Tasks {
     this._pillText = '';
     this._buildUI();
     this._buildMarker();
+  }
+
+  /** Reputation: authoritative from the server profile when online. */
+  get reputation() {
+    return this.server?.profile?.reputation ?? this.rep;
   }
 
   async init() {
@@ -170,8 +176,20 @@ export class Tasks {
         if (step.take && !step.take.every(id => this.inventory.count(id) > 0)) {
           this._setPill('🌾 Missing ingredients — retrace your steps');
         } else {
-          for (const id of step.take ?? []) this.inventory.remove(id, 1);
-          if (step.give) this.inventory.add(step.give, 1);
+          if (this.server) {
+            // authoritative: consume the inputs and grant the output
+            // server-side (validated against the player's profession)
+            if (step.take?.length) {
+              this.server.supa.rpc('consume_items', { p_items: step.take });
+            }
+            if (step.give) {
+              this.server.supa.rpc('task_item', { p_item: step.give })
+                .then(() => this.server._refreshInventory());
+            }
+          } else {
+            for (const id of step.take ?? []) this.inventory.remove(id, 1);
+            if (step.give) this.inventory.add(step.give, 1);
+          }
           s.stepIdx++;
           if (s.stepIdx >= def.steps.length) this._complete();
           else { this._save(); this._toast(step.label + ' ✓'); }
@@ -230,16 +248,29 @@ export class Tasks {
     setTimeout(() => {
       this._casting = false;
       if (Math.random() < (def.junkChance ?? 0.25)) {
-        this.inventory.add('old_boot', 1);
+        if (this.server) {
+          this.server.supa.rpc('task_item', { p_item: 'old_boot' })
+            .then(() => this.server._refreshInventory());
+        } else {
+          this.inventory.add('old_boot', 1);
+        }
         this._toast('…an old boot. The sea mocks you.');
       } else {
         // today's fish bites most often; the rest of the pool fills out the line
         const catchId = Math.random() < 0.6
           ? s.fishId
           : def.fishPool[(Math.random() * def.fishPool.length) | 0];
-        this.inventory.add(catchId, 1);
-        this.skills?.addXp('fishing', catchId === s.fishId ? 14 : 6);
-        if (catchId === s.fishId) {
+        const isTarget = catchId === s.fishId;
+        if (this.server) {
+          // validated server path: grants the fish item + fishing XP only
+          // to an employed fisherman, and only known fish ids
+          this.server.supa.rpc('catch_fish', { p_fish: catchId })
+            .then(() => this.server._refreshInventory());
+        } else {
+          this.inventory.add(catchId, 1);
+          this.skills?.addXp('fishing', isTarget ? 14 : 6);
+        }
+        if (isTarget) {
           s.caught++;
           this._save();
           if (s.caught >= def.count) this._complete();
@@ -263,17 +294,28 @@ export class Tasks {
     return waterline - coord < maxDist;
   }
 
-  _complete() {
+  async _complete() {
     const def = this.def, s = this.state;
     s.status = 'done';
     this._save();
+
+    if (this.server) {
+      // authoritative: the server grants coin, rep, and skill xp by role,
+      // enforces one-claim-per-day, and returns the new totals
+      const res = await this.server.claimTask(this.roles.current);
+      if (res?.error) {
+        this._toast(`${def.name} done — ${res.error}`);
+      } else {
+        this._toast(`${def.name} complete! +${res.reward?.coin ?? 0} gold, +${res.reward?.rep ?? 0} reputation`);
+      }
+      this._renderCard();
+      return;
+    }
+
+    // offline: local grants (unchanged)
     const r = def.reward ?? {};
     if (r.coin) this.inventory.add('coin', r.coin);
-    if (r.rep) {
-      this.rep += r.rep;
-      localStorage.setItem(REP_KEY, String(this.rep));
-    }
-    // skill training per task type
+    if (r.rep) { this.rep += r.rep; localStorage.setItem(REP_KEY, String(this.rep)); }
     if (def.type === 'patrol') { this.skills?.addXp('endurance', 35); this.skills?.addXp('strength', 35); }
     if (def.type === 'gather') { this.skills?.addXp('cooking', 45); }
     if (def.type === 'fish')   { this.skills?.addXp('fishing', 30); }

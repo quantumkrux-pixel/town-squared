@@ -22,8 +22,11 @@ import { Mirage } from './Mirage.js';
 import { MapView } from './MapView.js';
 import { PlayerCard } from './PlayerCard.js';
 import { Bibliofolio } from './Bibliofolio.js';
+import { Farming } from './Farming.js';
+import { Shop } from './Shop.js';
 import { Auth } from './Auth.js';
-import { Profile } from './Profile.js';
+import { ServerCharacter } from './ServerCharacter.js';
+import { CharacterCreate } from './CharacterCreate.js';
 import { Friends } from './Friends.js';
 
 const canvas = document.getElementById('game');
@@ -113,7 +116,7 @@ const registry = new AssetRegistry();
 const world = new World(scene, registry);
 const rig = new CameraRig(camera, canvas, CONFIG.CAMERA);
 
-let player, remotes, net, editor, interactions, inventory, containers, roles, tasks, brain, skills, mirage, mapView, biblio;
+let player, remotes, net, editor, interactions, inventory, containers, roles, tasks, brain, skills, mirage, mapView, biblio, farming, shop;
 
 async function boot() {
   // Optional model assignments — swap placeholders for your GLBs without
@@ -127,31 +130,43 @@ async function boot() {
 
   editor = new Editor({ world, registry, camera, rig, canvas });
 
-  // persistent identity: anonymous auth gives a durable id that survives
-  // refresh (offline → a stable localStorage uuid). Profiles and friends
-  // both stand on this.
+  // ---- identity & authority ----
+  // Real login (no anonymous): auth.uid() is a durable person, which is
+  // what makes server-authoritative gold/items/XP meaningful. Then load
+  // the authoritative character, and run one-time creation if this
+  // account has never named itself.
   const auth = new Auth(CONFIG);
   const identity = await auth.init();
-  if (!identity.name) identity.name = randomName();
+
+  const server = new ServerCharacter({ auth, cfg: CONFIG });
+  await server.init();
+
+  const creator = new CharacterCreate({ auth, cfg: CONFIG });
+  const chosenName = await creator.maybeRun(server.profile);
+  if (chosenName) await server.reload();          // pick up the new name
+  identity.name = server.profile?.display_name ?? chosenName ?? randomName();
 
   roles = new Roles();
   await roles.init();
-  skills = new Skills();
+  skills = new Skills(server);
   await skills.init();
   brain = new NpcBrain(CONFIG, identity);
   interactions = new Interactions({ world, camera, scene, roles, brain, skills });
 
-  inventory = new Inventory();
+  inventory = new Inventory(server);
   await inventory.init();
 
   containers = new Containers({ world, registry, camera, inventory, cfg: CONFIG, identity, skills });
   await containers.init();
 
-  tasks = new Tasks({ world, inventory, roles, skills });
+  tasks = new Tasks({ world, inventory, roles, skills, server });
   await tasks.init();
 
   // ---- cooking: Use a raw fish near a fire to cook it ----
-  // Burn chance falls as Cooking rises: 32% at level 1 → 5% floor by ~10.
+  // The SERVER consumes the raw fish, rolls the burn (weighted by your
+  // Cooking level), and grants the cooked item + XP — so a client can't
+  // retry a failed roll or mint meals it didn't earn. The client only
+  // checks proximity to a fire and renders the outcome.
   const COOK_SPOTS = new Set(['campfire', 'tavern']);
   const nearFire = () => world.placed.some(rec =>
     COOK_SPOTS.has(rec.data.asset) && (rec.obj ? rec.obj.visible : true) &&
@@ -163,17 +178,20 @@ async function boot() {
       skills._toast('You need a fire to cook. The tavern hearth or a campfire will do.');
       return false;
     }
-    const burnChance = Math.max(0.05, 0.32 - (skills.level('cooking') - 1) * 0.03);
-    if (Math.random() < burnChance) {
-      skills.addXp('cooking', 3); // burnt lessons still count
-      skills._toast('🔥 Burnt to a crisp. The gulls won\u2019t even take it.');
-      return true; // consume the fish — it is very gone
-    }
-    inventory.add(def.cooksInto, 1);
-    skills.addXp('cooking', 9);
-    const cookedName = inventory.itemDefs[def.cooksInto]?.name ?? 'a meal';
-    skills._toast(`🍳 ${cookedName} — cooked to perfection.`);
-    return true; // consume the raw fish
+    server.supa.rpc('cook_item', { p_raw: id }).then(({ data, error }) => {
+      if (error || data?.error) {
+        skills._toast(data?.error ?? 'The fire refuses you.');
+        return;
+      }
+      server.reload();   // authoritative inventory + cooking xp
+      if (data.burnt) {
+        skills._toast('\u{1F525} Burnt to a crisp. The gulls won\u2019t even take it.');
+      } else {
+        const cookedName = inventory.itemDefs[data.cooked]?.name ?? 'a meal';
+        skills._toast(`\u{1F373} ${cookedName} — cooked to perfection.`);
+      }
+    });
+    return false; // the server consumed it; don't also remove locally
   };
 
   mirage = new Mirage({ world, registry, skills, inventory, identity });
@@ -185,20 +203,32 @@ async function boot() {
   biblio.setCamera(camera);
   editor.setBibliofolio(biblio);
 
-  // ---- persistent character ----
-  // Load the server profile (if online) and hydrate skills, inventory,
-  // books, and name from it — otherwise the localStorage each system
-  // already loaded stands. Then push changes back, debounced.
-  const profile = new Profile({ auth, cfg: CONFIG, skills, inventory, biblio });
-  await profile.init(identity);
-  // any XP, item, or book change schedules a save
-  const _sk = skills.addXp.bind(skills); skills.addXp = (id, n) => { _sk(id, n); profile.save(); };
-  const _iadd = inventory.add.bind(inventory); inventory.add = (id, n) => { const r = _iadd(id, n); profile.save(); return r; };
-  const _irem = inventory.remove.bind(inventory); inventory.remove = (id, n) => { const r = _irem(id, n); profile.save(); return r; };
-  const _bcol = biblio.collect.bind(biblio); biblio.collect = (b) => { _bcol(b); profile.save(); };
-  // save on the way out
-  window.addEventListener('pagehide', () => profile.flushNow());
-  document.addEventListener('visibilitychange', () => { if (document.hidden) profile.flushNow(); });
+  farming = new Farming({ world, server, inventory, skills, camera });
+  await farming.init();
+
+  shop = new Shop({ server, inventory, onSay: (msg) => interactions._say(msg) });
+  await shop.init();
+
+  // ---- book collection persistence ----
+  // Skills, inventory, and gold are authoritative on the server (see
+  // ServerCharacter). Books are the one piece still client-owned, so they
+  // sync to the profile row on discovery.
+  const _bcol = biblio.collect.bind(biblio);
+  biblio.collect = (b) => {
+    _bcol(b);
+    server.supa?.from('profiles')
+      .update({ books: [...biblio.collected], updated_at: new Date().toISOString() })
+      .eq('id', auth.user.id)
+      .then(() => {}, () => {});
+  };
+  // hydrate previously-found books from the profile
+  if (Array.isArray(server.profile?.books) && server.profile.books.length) {
+    biblio.collected = new Set(server.profile.books);
+    for (const id of biblio.collected) {
+      const mesh = biblio.spawned.get(id);
+      if (mesh) { world.scene.remove(mesh); biblio.spawned.delete(id); }
+    }
+  }
 
   roles.onChange = (def) => {
     player?.setRole(roles.current, def?.name);
@@ -206,16 +236,12 @@ async function boot() {
     brain.playerRole = def?.name ?? '';
   };
 
-  // Example of wiring NPC actions into real systems: trading with the
-  // baker actually costs a coin and hands you a honey bun.
+  // NPC actions — 'trade' opens that merchant's shop
   interactions.onAction = (actionId, npc) => {
-    if (actionId === 'trade' && npc.role === 'Baker') {
-      if (inventory.remove('coin', 1)) {
-        inventory.add('bread', 1);
-        interactions._say('One honey bun, one coin. Fair as the morning is long.');
-      } else {
-        interactions._say('No coin, no bun, friend. Them\u2019s the rules.');
-      }
+    // merchants: the NPC names a shop in town.json, the shop lists its
+    // stock in shops.json, and buy_item on the server sets the real price
+    if (actionId === 'trade' && npc.shop && shop.has(npc.shop)) {
+      shop.open(npc.shop);
       return;
     }
     interactions._say(`(${actionId} isn't wired up yet — hook it in Interactions.onAction.)`);
@@ -250,8 +276,6 @@ async function boot() {
   });
   await friends.init();
 
-  // renaming yourself updates the nametag and persists
-  profile.onName(name => player?.setName?.(name));
   net.onStatus = (label, mode) => {
     netLabel.textContent = label;
     netDot.className = `dot ${mode}`;
@@ -320,6 +344,8 @@ function handleTap(clientX, clientY) {
     return;
   }
   containers?.close();
+  farming?.close();
+  shop?.close();
 
   // the mirage: tap to approach, enter when close
   if (mirage?.isVisible && mirage.pick(clientX, clientY)) {
@@ -331,6 +357,21 @@ function handleTap(clientX, clientY) {
       player.setMoveTarget(new THREE.Vector3(player.pos.x + dir.x, 0, player.pos.z + dir.z));
     } else {
       mirage.enter();
+    }
+    return;
+  }
+
+  // farm plots: walk over, then open the tending panel
+  const plotKey = farming?.pick(clientX, clientY);
+  if (plotKey) {
+    const pp = farming.positionOf(plotKey);
+    if (pp) {
+      const dist = Math.hypot(pp.x - player.pos.x, pp.z - player.pos.z);
+      if (dist > 2.6) {
+        player.setMoveTarget(new THREE.Vector3(pp.x, 0, pp.z));
+      } else {
+        farming.open(plotKey);
+      }
     }
     return;
   }
@@ -393,7 +434,7 @@ function loop(now) {
 
   // every 60m walked trains Endurance a little
   walkAccum += player.isMoving ? (player._speedNow ?? 0) * dt : 0;
-  if (walkAccum >= 60) { walkAccum -= 60; skills.addXp('endurance', 3); }
+  if (walkAccum >= 60) { walkAccum -= 60; skills.addXp('endurance', 3, 'walk'); }
 
   world.updateNPCs(Date.now());   // deterministic: same on every client
   world.updateWater(Date.now());
@@ -403,6 +444,7 @@ function loop(now) {
   containers.update(Date.now());
   mirage.update(Date.now());
   biblio.update(Date.now());
+  farming.update(Date.now());
   mapView.draw(Date.now());
   remotes.update(Date.now());
 

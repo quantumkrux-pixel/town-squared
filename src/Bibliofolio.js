@@ -224,7 +224,7 @@ export class Bibliofolio {
     if (mesh) { this.world.scene.remove(mesh); this.spawned.delete(book.id); }
     this.collected.add(book.id);
     this._save();
-    this.skills?.addXp('intellect', DISCOVERY_XP);
+    this.skills?.addXp('intellect', DISCOVERY_XP, 'book');
     this._read(book, true);
     if (this.open) this._renderPanel();
   }

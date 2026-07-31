@@ -87,4 +87,16 @@ export class ServerCharacter {
     if (data?.ok) await this._refreshInventory();
     return data;
   }
+
+  /** Ad-hoc XP for a training action (reason gates the amount server-side).
+   *  Fire-and-refresh: the skill row updates and the realtime feed (plus
+   *  this explicit refresh) brings the new xp back. */
+  async grantXp(skillId, amount, reason) {
+    const { data, error } = await this.supa.rpc('grant_xp', {
+      p_skill: skillId, p_amount: Math.round(amount), p_reason: reason,
+    });
+    if (error) return { error: error.message };
+    if (data?.ok) await this._refreshSkills();
+    return data;
+  }
 }

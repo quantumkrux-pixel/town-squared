@@ -64,23 +64,40 @@ const CSS = `
   #friendsPanel .close { position: absolute; top: 12px; right: 14px;
     background: none; border: none; color: #e9ddc2; font-size: 18px; cursor: pointer; opacity: 0.7; }
 
-  /* chat thread */
+  /* chat dock — anchored bottom-right, collapses to its title bar */
   #chatPanel {
-    position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
-    width: min(360px, calc(100vw - 28px)); height: min(70vh, 520px);
+    position: fixed; right: 12px; bottom: 12px;
+    width: min(320px, calc(100vw - 24px)); height: 420px; max-height: 70vh;
     display: none; flex-direction: column;
     background: linear-gradient(160deg, rgba(42,33,24,0.98), rgba(26,20,14,0.98));
-    border: 2px solid rgba(201,162,75,0.55); border-radius: 14px;
+    border: 2px solid rgba(201,162,75,0.55); border-radius: 12px 12px 12px 12px;
     box-shadow: 0 12px 40px rgba(0,0,0,0.6); z-index: 22; color: #e9ddc2;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px;
+    overflow: hidden;
   }
   #chatPanel.open { display: flex; }
-  #chatPanel .chead { display: flex; align-items: center; gap: 10px;
-    padding: 12px 14px; border-bottom: 1px solid rgba(201,162,75,0.3); }
+  #chatPanel.collapsed { height: auto; }
+  #chatPanel.collapsed #chatLog, #chatPanel.collapsed #chatForm { display: none; }
+  #chatPanel .chead {
+    display: flex; align-items: center; gap: 8px; cursor: pointer;
+    padding: 11px 12px; border-bottom: 1px solid rgba(201,162,75,0.3);
+    background: rgba(201,162,75,0.08);
+  }
+  #chatPanel.collapsed .chead { border-bottom: none; }
   #chatPanel .chead .cname { font-family: 'Cinzel', serif; font-weight: 700; color: #c9a24b; }
-  #chatPanel .cback { background: none; border: none; color: #e9ddc2; font-size: 18px; cursor: pointer; }
+  #chatPanel .chead .cunread {
+    background: #a8503c; color: #fff; border-radius: 8px; font-size: 10px;
+    padding: 1px 7px; display: none;
+  }
+  #chatPanel .chead .cunread.show { display: inline-block; }
+  #chatPanel .chead .cspring { margin-left: auto; display: flex; gap: 4px; }
+  #chatPanel .chead button {
+    background: none; border: none; color: #e9ddc2; font-size: 16px;
+    cursor: pointer; opacity: 0.75; line-height: 1; padding: 2px 4px;
+  }
+  #chatPanel .chead button:hover { opacity: 1; }
   #chatLog { flex: 1; overflow-y: auto; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
-  #chatLog .msg { max-width: 78%; padding: 7px 11px; border-radius: 12px; line-height: 1.4; }
+  #chatLog .msg { max-width: 78%; padding: 7px 11px; border-radius: 12px; line-height: 1.4; word-break: break-word; }
   #chatLog .msg.them { background: rgba(233,221,194,0.1); align-self: flex-start; border-bottom-left-radius: 3px; }
   #chatLog .msg.me { background: rgba(201,162,75,0.28); align-self: flex-end; border-bottom-right-radius: 3px; }
   #chatForm { display: flex; gap: 8px; padding: 12px 14px; border-top: 1px solid rgba(201,162,75,0.3); }
@@ -178,9 +195,12 @@ export class Friends {
   async _openChat(friendId) {
     this.openThread = friendId;
     this.unread.delete(friendId);
+    this._dockUnread = 0;
     this._renderBadge();
     this.chatName.textContent = this._names.get(friendId) ?? 'Traveler';
     this.chatPanel.classList.add('open');
+    this.chatPanel.classList.remove('collapsed');   // open expanded
+    this._updateDockUnread();
     const { data } = await this.supa.from('messages')
       .select('sender, recipient, body, created_at')
       .or(`and(sender.eq.${this.identity.id},recipient.eq.${friendId}),and(sender.eq.${friendId},recipient.eq.${this.identity.id})`)
@@ -188,6 +208,18 @@ export class Friends {
     this.chatLog.innerHTML = '';
     for (const m of data ?? []) this._appendMsg(m.body, m.sender === this.identity.id);
     this.chatLog.scrollTop = this.chatLog.scrollHeight;
+  }
+
+  _toggleCollapse() {
+    const collapsed = this.chatPanel.classList.toggle('collapsed');
+    this.chatPanel.querySelector('.ccollapse').textContent = collapsed ? '▴' : '▾';
+    if (!collapsed) { this._dockUnread = 0; this._updateDockUnread(); }
+  }
+
+  _updateDockUnread() {
+    const n = this._dockUnread ?? 0;
+    this.chatUnread.textContent = n;
+    this.chatUnread.classList.toggle('show', n > 0);
   }
 
   async _send(body) {
@@ -204,6 +236,11 @@ export class Friends {
     if (this.openThread === msg.sender) {
       this._appendMsg(msg.body, false);
       this.chatLog.scrollTop = this.chatLog.scrollHeight;
+      // if the dock is collapsed, surface a count on its title bar
+      if (this.chatPanel.classList.contains('collapsed')) {
+        this._dockUnread = (this._dockUnread ?? 0) + 1;
+        this._updateDockUnread();
+      }
     } else {
       this.unread.set(msg.sender, (this.unread.get(msg.sender) ?? 0) + 1);
       this._render(); this._renderBadge();
@@ -243,15 +280,35 @@ export class Friends {
     this.chatPanel = document.createElement('div');
     this.chatPanel.id = 'chatPanel';
     this.chatPanel.innerHTML = `
-      <div class="chead"><button class="cback">‹</button><span class="cname"></span></div>
+      <div class="chead">
+        <span class="cname"></span>
+        <span class="cunread"></span>
+        <span class="cspring">
+          <button class="ccollapse" title="Collapse">▾</button>
+          <button class="cclose" title="Close">✕</button>
+        </span>
+      </div>
       <div id="chatLog"></div>
       <div id="chatForm"><input type="text" placeholder="Message…" maxlength="2000"><button>Send</button></div>`;
     document.body.appendChild(this.chatPanel);
     this.chatName = this.chatPanel.querySelector('.cname');
+    this.chatUnread = this.chatPanel.querySelector('.cunread');
     this.chatLog = this.chatPanel.querySelector('#chatLog');
     const input = this.chatPanel.querySelector('#chatForm input');
     const sendBtn = this.chatPanel.querySelector('#chatForm button');
-    this.chatPanel.querySelector('.cback').addEventListener('click', () => { this.chatPanel.classList.remove('open'); this.openThread = null; });
+    const collapseBtn = this.chatPanel.querySelector('.ccollapse');
+
+    // clicking the header bar toggles collapse; the ✕ closes the thread
+    this.chatPanel.querySelector('.chead').addEventListener('click', e => {
+      if (e.target.closest('.cclose')) return;
+      this._toggleCollapse();
+    });
+    this.chatPanel.querySelector('.cclose').addEventListener('click', e => {
+      e.stopPropagation();
+      this.chatPanel.classList.remove('open');
+      this.openThread = null;
+    });
+
     const doSend = () => { this._send(input.value); input.value = ''; };
     sendBtn.addEventListener('click', doSend);
     input.addEventListener('keydown', e => { if (e.code === 'Enter') doSend(); });

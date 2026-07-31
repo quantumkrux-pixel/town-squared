@@ -169,8 +169,8 @@ export class Mirage {
     this._claimed = this._cycle;
     localStorage.setItem(CLAIM_KEY, String(this._cycle));
 
-    this.skills?.addXp('intellect', 25);
-    this.skills?.addXp('luck', 8);
+    this.skills?.addXp('intellect', 25, 'mirage');
+    this.skills?.addXp('luck', 8, 'mirage');
     const r = Math.random();
     if (r < 0.35) {
       this.inventory?.add('rune_shard', 1);

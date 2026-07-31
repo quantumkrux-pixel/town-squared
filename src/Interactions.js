@@ -165,7 +165,7 @@ export class Interactions {
       // graceful fallback to canned lines if the function is unreachable
       this._doAction('talk');
     } else {
-      this.skills?.addXp('speechcraft', 6); // real conversation trains harder
+      this.skills?.addXp('speechcraft', 6, 'talk'); // real conversation trains harder
     }
     input.disabled = false; if (btn) btn.disabled = false;
     input.focus();
@@ -202,7 +202,7 @@ export class Interactions {
       const last = this._talkXpAt.get(npc) ?? 0;
       if (Date.now() - last > 60000) {
         this._talkXpAt.set(npc, Date.now());
-        this.skills?.addXp('speechcraft', 4);
+        this.skills?.addXp('speechcraft', 4, 'talk');
       }
       return;
     }

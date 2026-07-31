@@ -91,9 +91,10 @@ const CSS = `
 `;
 
 export class Skills {
-  constructor() {
+  constructor(server = null) {
+    this.server = server;        // ServerCharacter, or null (offline/local)
     this.defs = {};
-    this.state = {};        // id -> { xp }
+    this.state = {};        // id -> { xp }  (local mode)
     this.onLevelUp = (id, level) => {};
     this._buildUI();
   }
@@ -103,15 +104,25 @@ export class Skills {
       const res = await fetch('data/skills.json');
       if (res.ok) this.defs = await res.json();
     } catch { /* no skills.json — panel stays empty */ }
-    this.loadJSON(localStorage.getItem(STORAGE_KEY));
-    for (const id of Object.keys(this.defs)) {
-      if (!this.state[id]) this.state[id] = { xp: 0 };
+
+    if (this.server) {
+      // authoritative: xp comes from the server mirror; re-render on sync
+      this.server.onChange(() => { if (this.panel.classList.contains('open')) this._render(); });
+    } else {
+      this.loadJSON(localStorage.getItem(STORAGE_KEY));
+      for (const id of Object.keys(this.defs)) {
+        if (!this.state[id]) this.state[id] = { xp: 0 };
+      }
     }
+  }
+
+  _xpOf(id) {
+    return this.server ? this.server.xp(id) : (this.state[id]?.xp ?? 0);
   }
 
   // ---------------- levels ----------------
   level(id) {
-    let xp = this.state[id]?.xp ?? 0;
+    let xp = this._xpOf(id);
     let lvl = 1;
     while (xp >= xpToNext(lvl)) { xp -= xpToNext(lvl); lvl++; }
     return lvl;
@@ -119,24 +130,49 @@ export class Skills {
 
   /** [xp into current level, xp needed for next] */
   progress(id) {
-    let xp = this.state[id]?.xp ?? 0;
+    let xp = this._xpOf(id);
     let lvl = 1;
     while (xp >= xpToNext(lvl)) { xp -= xpToNext(lvl); lvl++; }
     return [xp, xpToNext(lvl)];
   }
 
-  addXp(id, amount) {
+  /** Grant XP. In SERVER mode this routes to the capped server RPC using
+   *  `reason` (which the server validates and bounds); the authoritative
+   *  xp comes back via the sync. In LOCAL mode it's immediate arithmetic.
+   *  reason defaults are inferred from skill for legacy callers. */
+  async addXp(id, amount, reason) {
     if (!this.defs[id] || amount <= 0) return;
+
+    if (this.server) {
+      const before = this.level(id);
+      const res = await this.server.grantXp(id, amount, reason ?? this._defaultReason(id));
+      if (res?.ok) {
+        const after = this.level(id);
+        if (after > before) this._levelToast(id, after);
+        if (this.panel.classList.contains('open')) this._render();
+      }
+      return;
+    }
+
+    // local mode
     const before = this.level(id);
     this.state[id].xp += Math.round(amount);
     const after = this.level(id);
     this._save();
-    if (after > before) {
-      const def = this.defs[id];
-      this._toast(`${this._iconHTML(def.icon)} ${def.name} reached level ${after}!`);
-      this.onLevelUp(id, after);
-    }
+    if (after > before) this._levelToast(id, after);
     if (this.panel.classList.contains('open')) this._render();
+  }
+
+  _defaultReason(id) {
+    // fallback reason mapping for callers that don't pass one
+    return ({ cooking: 'cook', intellect: 'book', perception: 'chest',
+              speechcraft: 'talk', endurance: 'walk', luck: 'chest' })[id] ?? 'talk';
+  }
+
+  _levelToast(id, after) {
+    const def = this.defs[id];
+    this._toast(`${this._iconHTML(def.icon)} ${def.name} reached level ${after}!`);
+    this.onLevelUp(id, after);
   }
 
   // ---------------- persistence ----------------
