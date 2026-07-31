@@ -1,0 +1,38 @@
+{
+  "farmer": {
+    "title": "Hedge & Furrow",
+    "greeting": "Seeds, tools, and honest dirt. What'll it be?",
+    "stock": [
+      {
+        "item": "seed_wheat",
+        "price": 2
+      },
+      {
+        "item": "seed_herb",
+        "price": 6
+      },
+      {
+        "item": "seed_moonpetal",
+        "price": 15
+      },
+      {
+        "item": "watering_can",
+        "price": 25
+      },
+      {
+        "item": "iron_hoe",
+        "price": 40
+      }
+    ]
+  },
+  "baker": {
+    "title": "The Morning Loaf",
+    "greeting": "Fresh this morning. Mostly.",
+    "stock": [
+      {
+        "item": "bread",
+        "price": 1
+      }
+    ]
+  }
+}

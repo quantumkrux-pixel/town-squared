@@ -1,47 +1,52 @@
 {
   "cooking": {
     "name": "Cooking",
-    "icon": "assets/ui/skills/skill_cooking.png",
+    "icon": "🍳",
     "desc": "Trained by completing the morning bake."
   },
   "fishing": {
     "name": "Fishing",
-    "icon": "assets/ui/skills/skill_fishing.png",
+    "icon": "🎣",
     "desc": "Trained by every catch — the day's target fish teaches most."
   },
   "perception": {
     "name": "Perception",
-    "icon": "👁assets/ui/skills/skill_perception.png",
+    "icon": "👁️",
     "desc": "Trained by finding and opening chests."
   },
   "endurance": {
     "name": "Endurance",
-    "icon": "assets/ui/skills/skill_endurance.png",
+    "icon": "🏃",
     "desc": "Trained by distance walked and finished patrols."
   },
   "intellect": {
     "name": "Intellect",
-    "icon": "assets/ui/skills/skill_intellect.png",
+    "icon": "📚",
     "desc": "Trained by the whispers of the magick cave and the pages of lost books."
   },
   "speechcraft": {
     "name": "Speech-Craft",
-    "icon": "assets/ui/skills/skill_speechcraft.png",
+    "icon": "💬",
     "desc": "Trained by conversing with the townsfolk."
   },
   "luck": {
     "name": "Luck",
-    "icon": "assets/ui/skills/skill_luck.png",
+    "icon": "🍀",
     "desc": "Trained by rare finds. Or is it the other way around?"
   },
   "strength": {
     "name": "Strength",
-    "icon": "assets/ui/skills/skill_strength.png",
+    "icon": "💪",
     "desc": "Trained by the Watch's rounds."
   },
   "guile": {
     "name": "Guile",
-    "icon": "assets/ui/skills/skill_guile.png",
+    "icon": "🦊",
     "desc": "Trained by deeds not yet written."
+  },
+  "farming": {
+    "name": "Farming",
+    "icon": "🌾",
+    "desc": "Trained by tending plots — seeding, watering with care, and harvesting."
   }
 }

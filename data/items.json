@@ -91,5 +91,53 @@
     "icon": "🔮",
     "stack": 5,
     "desc": "A splinter of somewhere else. It hums when the cave is near."
+  },
+  "seed_wheat": {
+    "name": "Wheat Seed",
+    "icon": "🌱",
+    "stack": 20,
+    "desc": "Common grain. A day in the soil, two good waterings."
+  },
+  "seed_herb": {
+    "name": "Herb Seed",
+    "icon": "🌿",
+    "stack": 20,
+    "desc": "Fussier than wheat. Wants a day and a half, and three drinks."
+  },
+  "seed_moonpetal": {
+    "name": "Moonpetal Seed",
+    "icon": "✨",
+    "stack": 10,
+    "desc": "Blooms slow and strange. Two days, four waterings, and patience."
+  },
+  "wheat": {
+    "name": "Wheat",
+    "icon": "🌾",
+    "stack": 20,
+    "desc": "Golden and heavy. The mill would know what to do with it."
+  },
+  "herbs": {
+    "name": "Herbs",
+    "icon": "🍃",
+    "stack": 20,
+    "desc": "Sharp-smelling and useful. Every good pot wants some."
+  },
+  "moonpetal": {
+    "name": "Moonpetal",
+    "icon": "🌸",
+    "stack": 10,
+    "desc": "Pale petals that hold a little light. It hums faintly, like the cave."
+  },
+  "watering_can": {
+    "name": "Watering Can",
+    "icon": "🪣",
+    "stack": 1,
+    "desc": "A gentler pour. Forgives a heavy hand at the roots."
+  },
+  "iron_hoe": {
+    "name": "Iron Hoe",
+    "icon": "⛏️",
+    "stack": 1,
+    "desc": "Breaks the soil properly. Every harvest comes up a little richer."
   }
 }
