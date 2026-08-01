@@ -94,6 +94,9 @@ export class Interactions {
     this._pointer = new THREE.Vector2();
 
     // Plug real game systems in here. Called for every non-"talk" action.
+    // called on every 'talk' — 'talk' returns before onAction, so
+    // anything listening for conversation hooks in here instead
+    this.onTalk = () => {};
     this.onAction = (actionId, npc) => {
       this._say(`(${ACTION_LABELS[actionId] ?? actionId} isn't wired up yet — hook it in Interactions.onAction.)`);
     };
@@ -204,6 +207,8 @@ export class Interactions {
         this._talkXpAt.set(npc, Date.now());
         this.skills?.addXp('speechcraft', 4, 'talk');
       }
+      // gossip hook: talking is how rumours travel (see StonePuzzle)
+      this.onTalk(npc);
       return;
     }
     if (id === 'join' && npc.grantsRole && this.roles) {

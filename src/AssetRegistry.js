@@ -101,45 +101,7 @@ function buildHouseLarge() {
   return g;
 }
 
-function buildCattleFarm() {
-  const g = new THREE.Group();
-  g.add(box(4.5, 2.6, 3.4, C.plasterDark, 0, 1.3, 0));
-  g.add(box(4.7, 0.35, 3.6, C.wood, 0, 2.6, 0));                   // beam line
-  g.add(roof(4.5, 1.8, 3.4, C.roofBlue, 2.78));
-  g.add(box(0.9, 1.4, 0.1, C.woodDark, -1.2, 0.7, 1.73));
-  g.add(box(0.7, 0.7, 0.1, 0x8fb4c9, 0.6, 1.6, 1.72));
-  g.add(box(0.7, 0.7, 0.1, 0x8fb4c9, 1.7, 1.6, 1.72));
-  g.add(cyl(0.28, 0.28, 1.5, C.stoneDark, 1.6, 3.4, -0.8, 6));     // chimney
-  return g;
-}
-
 function buildTavern() {
-  const g = new THREE.Group();
-  g.add(box(5.5, 3.0, 4.2, C.wood, 0, 1.5, 0));
-  g.add(box(5.7, 0.3, 4.4, C.woodDark, 0, 3.0, 0));
-  g.add(roof(5.5, 2.1, 4.2, C.roofPurple, 3.15));
-  g.add(box(1.1, 1.6, 0.12, C.woodDark, 0, 0.8, 2.14));
-  // hanging sign
-  g.add(box(1.4, 0.08, 0.08, C.woodDark, 2.2, 2.5, 2.35));
-  g.add(box(0.9, 0.6, 0.06, C.gold, 2.4, 2.05, 2.35));
-  g.add(cyl(0.3, 0.3, 1.8, C.stoneDark, -2.0, 4.0, -1.2, 6));
-  return g;
-}
-
-function buildShopSmall() {
-  const g = new THREE.Group();
-  g.add(box(5.5, 3.0, 4.2, C.wood, 0, 1.5, 0));
-  g.add(box(5.7, 0.3, 4.4, C.woodDark, 0, 3.0, 0));
-  g.add(roof(5.5, 2.1, 4.2, C.roofPurple, 3.15));
-  g.add(box(1.1, 1.6, 0.12, C.woodDark, 0, 0.8, 2.14));
-  // hanging sign
-  g.add(box(1.4, 0.08, 0.08, C.woodDark, 2.2, 2.5, 2.35));
-  g.add(box(0.9, 0.6, 0.06, C.gold, 2.4, 2.05, 2.35));
-  g.add(cyl(0.3, 0.3, 1.8, C.stoneDark, -2.0, 4.0, -1.2, 6));
-  return g;
-}
-
-function buildBlacksmith() {
   const g = new THREE.Group();
   g.add(box(5.5, 3.0, 4.2, C.wood, 0, 1.5, 0));
   g.add(box(5.7, 0.3, 4.4, C.woodDark, 0, 3.0, 0));
@@ -183,84 +145,6 @@ function buildStall() {
   return g;
 }
 
-function buildWall() {
-  const g = new THREE.Group();
-  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
-  const awn = box(2.8, 0.08, 1.8, C.cloth, 0, 2.05, 0.1);
-  awn.rotation.x = -0.18;
-  g.add(awn);
-  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
-  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
-  return g;
-}
-
-function buildStoneFace() {
-  const g = new THREE.Group();
-  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
-  const awn = box(2.8, 0.08, 1.8, C.cloth, 0, 2.05, 0.1);
-  awn.rotation.x = -0.18;
-  g.add(awn);
-  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
-  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
-  return g;
-}
-
-function buildWallCorner() {
-  const g = new THREE.Group();
-  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
-  const awn = box(2.8, 0.08, 1.8, C.cloth, 0, 2.05, 0.1);
-  awn.rotation.x = -0.18;
-  g.add(awn);
-  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
-  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
-  return g;
-}
-
-function buildFenceSegment() {
-  const g = new THREE.Group();
-  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
-  const awn = box(2.8, 0.08, 1.8, C.woodDark, 1.1, 1.0, -0.5);
-  awn.rotation.x = -0.18;
-  g.add(awn);
-  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
-  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
-  return g;
-}
-
-function buildFenceSegment2() {
-  const g = new THREE.Group();
-  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
-  const awn = box(2.8, 0.08, 1.8, C.woodDark, 1.1, 1.0, -0.5);
-  awn.rotation.x = -0.18;
-  g.add(awn);
-  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
-  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
-  return g;
-}
-
-function buildDock() {
-  const g = new THREE.Group();
-  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
-  const awn = box(2.8, 0.08, 1.8, C.woodDark, 1.1, 1.0, -0.5);
-  awn.rotation.x = -0.18;
-  g.add(awn);
-  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
-  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
-  return g;
-}
-
 function buildTree() {
   const g = new THREE.Group();
   g.add(cyl(0.16, 0.22, 1.1, C.woodDark, 0, 0.55, 0, 6));
@@ -278,25 +162,124 @@ function buildTreeRound() {
   return g;
 }
 
+function buildLamp() {
+  const g = new THREE.Group();
+  g.add(cyl(0.06, 0.09, 2.4, 0x3a3a3f, 0, 1.2, 0, 6));
+  const lantern = box(0.3, 0.35, 0.3, C.gold, 0, 2.5, 0);
+  // No PointLight: real lights multiply the cost of every lit pixel in a
+  // forward renderer. The emissive lantern IS the effect at this camera
+  // distance. When a night cycle lands, attach ONE light to the player.
+  lantern.material = new THREE.MeshLambertMaterial({ color: C.gold, emissive: 0xffb85c, emissiveIntensity: 1.25 });
+  g.add(lantern);
+  return g;
+}
+
+function buildRock() {
+  const g = new THREE.Group();
+  const r = new THREE.Mesh(new THREE.DodecahedronGeometry(0.55, 0), mat(C.stone));
+  r.position.y = 0.3; r.scale.y = 0.7; r.castShadow = true; r.receiveShadow = true;
+  g.add(r);
+  return g;
+}
+
+function buildCrate() {
+  const g = new THREE.Group();
+  g.add(box(0.7, 0.7, 0.7, C.wood, 0, 0.35, 0));
+  g.add(box(0.55, 0.55, 0.55, C.woodDark, 0.5, 0.28, -0.3));
+  return g;
+}
+
+function buildCampfire() {
+  const g = new THREE.Group();
+  // stone ring
+  for (let i = 0; i < 7; i++) {
+    const a = (i / 7) * Math.PI * 2;
+    const stone = new THREE.Mesh(new THREE.DodecahedronGeometry(0.16, 0), mat(C.stoneDark));
+    stone.position.set(Math.cos(a) * 0.55, 0.1, Math.sin(a) * 0.55);
+    stone.castShadow = false; stone.receiveShadow = true;
+    g.add(stone);
+  }
+  // crossed logs
+  const l1 = cyl(0.07, 0.07, 0.9, C.woodDark, 0, 0.14, 0, 6); l1.rotation.z = Math.PI / 2; l1.rotation.y = 0.5;
+  const l2 = cyl(0.07, 0.07, 0.9, C.woodDark, 0, 0.14, 0, 6); l2.rotation.z = Math.PI / 2; l2.rotation.y = -0.7;
+  g.add(l1, l2);
+  // flame: emissive cones
+  const flame = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.55, 7),
+    new THREE.MeshLambertMaterial({ color: 0xff8c2a, emissive: 0xff6a00, emissiveIntensity: 1.3 }));
+  flame.position.y = 0.42;
+  const core = new THREE.Mesh(new THREE.ConeGeometry(0.11, 0.34, 6),
+    new THREE.MeshLambertMaterial({ color: 0xffd66e, emissive: 0xffc93c, emissiveIntensity: 1.6 }));
+  core.position.y = 0.38;
+  g.add(flame, core);
+  return g;
+}
+
+function buildMagickCave() {
+  const g = new THREE.Group();
+  const rockMat = new THREE.MeshLambertMaterial({ color: 0x4a4356 });
+  // mound
+  const mound = new THREE.Mesh(new THREE.IcosahedronGeometry(1.7, 0), rockMat);
+  mound.position.y = 1.0; mound.scale.set(1.5, 1.05, 1.15);
+  mound.castShadow = false; mound.receiveShadow = true;
+  g.add(mound);
+  const side = new THREE.Mesh(new THREE.DodecahedronGeometry(0.9, 0), rockMat);
+  side.position.set(-1.8, 0.5, 0.4); side.castShadow = false;
+  g.add(side);
+  // the mouth: black void + glowing rim
+  const mouth = new THREE.Mesh(new THREE.CircleGeometry(0.85, 20),
+    new THREE.MeshBasicMaterial({ color: 0x0a0612 }));
+  mouth.position.set(0.1, 0.95, 1.55);
+  const rim = new THREE.Mesh(new THREE.RingGeometry(0.85, 1.05, 20),
+    new THREE.MeshLambertMaterial({ color: 0x8a5cff, emissive: 0x7a3cff, emissiveIntensity: 1.1, side: THREE.DoubleSide }));
+  rim.position.set(0.1, 0.95, 1.56);
+  rim.name = 'mirage_rim'; // Mirage.js pulses this
+  g.add(mouth, rim);
+  // crystals
+  for (const [x, z, h, r] of [[1.6, 0.9, 0.9, 0.18], [-1.1, 1.3, 0.65, 0.14], [1.1, -1.2, 1.1, 0.2]]) {
+    const c = new THREE.Mesh(new THREE.ConeGeometry(r, h, 6),
+      new THREE.MeshLambertMaterial({ color: 0xa88cff, emissive: 0x6a3cff, emissiveIntensity: 0.9 }));
+    c.position.set(x, h / 2, z); c.rotation.z = (x > 0 ? -1 : 1) * 0.15;
+    c.castShadow = false;
+    g.add(c);
+  }
+  return g;
+}
+
+function buildBookPickup() {
+  const g = new THREE.Group();
+  const cover = box(0.4, 0.09, 0.3, 0x7a3030, 0, 0, 0);
+  cover.castShadow = false;
+  const pages = box(0.36, 0.06, 0.26, 0xe6d9b8, 0, 0.02, 0.01);
+  pages.castShadow = false;
+  const rune = new THREE.Mesh(new THREE.PlaneGeometry(0.14, 0.14),
+    new THREE.MeshLambertMaterial({ color: 0xc9a24b, emissive: 0xd9b45c, emissiveIntensity: 1.2, side: THREE.DoubleSide }));
+  rune.rotation.x = -Math.PI / 2;
+  rune.position.y = 0.056;
+  g.add(cover, pages, rune);
+  g.rotation.z = 0.18; // a jaunty hover tilt
+  return g;
+}
+
 function buildFarmPlot() {
   const g = new THREE.Group();
 
-  // tilled soil bed — visible under every stage
+  // tilled soil bed — always visible under every stage
   const soil = box(2.2, 0.16, 2.2, 0x5a4632, 0, 0.08, 0);
   soil.receiveShadow = true; soil.castShadow = false;
   g.add(soil);
+  // furrows
   for (let i = -1; i <= 1; i++) {
-    const f = box(2.0, 0.05, 0.18, 0x4a3826, 0, 0.17, i * 0.6);   // furrows
+    const f = box(2.0, 0.05, 0.18, 0x4a3826, 0, 0.17, i * 0.6);
     f.castShadow = false;
     g.add(f);
   }
 
-  // Three stage groups, toggled by Farming.js via these exact names.
-  // Keep the names if you swap in GLBs — the client looks them up by name.
+  // --- stage: empty (bare furrows, nothing more) ---
   const empty = new THREE.Group();
   empty.name = 'stage_empty';
   g.add(empty);
 
+  // --- stage: seeded (small sprouts) ---
   const seeded = new THREE.Group();
   seeded.name = 'stage_seeded';
   for (let i = -1; i <= 1; i++) {
@@ -312,6 +295,7 @@ function buildFarmPlot() {
   }
   g.add(seeded);
 
+  // --- stage: grown (tall, heavy, ready) ---
   const grown = new THREE.Group();
   grown.name = 'stage_grown';
   for (let i = -1; i <= 1; i++) {
@@ -333,25 +317,147 @@ function buildFarmPlot() {
   return g;
 }
 
-function buildCampfire() {
+function buildRuneStone(symbolColor) {
   const g = new THREE.Group();
-  for (let i = 0; i < 7; i++) {                                    // stone ring
-    const a = (i / 7) * Math.PI * 2;
-    const stone = new THREE.Mesh(new THREE.DodecahedronGeometry(0.16, 0), mat(C.stoneDark));
-    stone.position.set(Math.cos(a) * 0.55, 0.1, Math.sin(a) * 0.55);
-    stone.castShadow = false; stone.receiveShadow = true;
-    g.add(stone);
+  const body = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.34, 0.46, 2.1, 6),
+    mat(0x6e6a63)
+  );
+  body.position.y = 1.05;
+  body.rotation.z = 0.04;
+  body.castShadow = true; body.receiveShadow = true;
+  g.add(body);
+  g.add(box(1.0, 0.18, 1.0, 0x5a564f, 0, 0.09, 0));   // base slab
+
+  // the carved face — StonePuzzle.js finds this by name to light it
+  const face = new THREE.Mesh(
+    new THREE.CircleGeometry(0.26, 16),
+    new THREE.MeshLambertMaterial({
+      color: symbolColor, emissive: symbolColor, emissiveIntensity: 0.35,
+    })
+  );
+  face.position.set(0, 1.35, 0.44);
+  face.name = 'rune_face';
+  g.add(face);
+  return g;
+}
+
+function buildPedestalBook() {
+  const g = new THREE.Group();
+  g.add(cyl(0.34, 0.44, 0.16, 0x6a6660, 0, 0.08, 0, 8));      // base
+  g.add(cyl(0.20, 0.24, 0.95, 0x77736c, 0, 0.58, 0, 8));      // column
+  const top = box(0.86, 0.10, 0.62, 0x6a6660, 0, 1.10, 0);
+  top.rotation.x = -0.22;
+  g.add(top);
+  // the great book, open
+  const left = box(0.38, 0.07, 0.5, 0xe8dcc0, -0.19, 1.19, 0);
+  const right = box(0.38, 0.07, 0.5, 0xe8dcc0, 0.19, 1.19, 0);
+  left.rotation.x = right.rotation.x = -0.22;
+  left.rotation.z = 0.05; right.rotation.z = -0.05;
+  g.add(left, right);
+  // the quill
+  const quill = cyl(0.012, 0.02, 0.42, 0xf2eee4, 0.3, 1.4, 0.1, 5);
+  quill.rotation.z = 0.5; quill.rotation.x = -0.3;
+  g.add(quill);
+  return g;
+}
+
+function buildHost() {
+  // the herald: taller hat than sense
+  const g = new THREE.Group();
+  g.add(cyl(0.2, 0.26, 0.95, 0x7a2f52, 0, 0.48, 0, 8));        // robe
+  const torso = box(0.42, 0.5, 0.26, 0x9c3f68, 0, 1.16, 0);
+  g.add(torso);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.17, 10, 8), mat(0xe8c9a0));
+  head.position.y = 1.58;
+  g.add(head);
+  g.add(cyl(0.19, 0.19, 0.06, 0x2e1a34, 0, 1.74, 0, 10));      // brim
+  g.add(cyl(0.13, 0.15, 0.44, 0x2e1a34, 0, 1.98, 0, 10));      // stovepipe
+  const feather = cyl(0.01, 0.02, 0.36, 0xd9b451, 0.1, 2.22, 0, 5);
+  feather.rotation.z = -0.5;
+  g.add(feather);
+  return g;
+}
+
+function buildGardenBed() {
+  const g = new THREE.Group();
+
+  // ---- stage: under construction (shown until Odell's work is done)
+  const wip = new THREE.Group();
+  wip.name = 'stage_locked';
+  // half-laid frame: two rails down, two stacked loose
+  const railA = box(2.6, 0.16, 0.16, C.woodDark, 0, 0.08, -1.2);
+  const railB = box(0.16, 0.16, 2.4, C.woodDark, -1.3, 0.08, 0);
+  wip.add(railA, railB);
+  const loose1 = box(2.4, 0.14, 0.14, C.woodDark, 0.3, 0.07, 1.1);
+  loose1.rotation.y = 0.22;
+  const loose2 = box(2.4, 0.14, 0.14, C.woodDark, 0.5, 0.21, 1.25);
+  loose2.rotation.y = 0.3;
+  wip.add(loose1, loose2);
+  // churned dirt, not yet turned properly
+  const rough = box(2.2, 0.08, 2.2, 0x6b5a45, 0, 0.04, 0);
+  rough.receiveShadow = true;
+  wip.add(rough);
+  // a stake with a scrap of plan tied to it
+  const stake = cyl(0.05, 0.05, 0.9, C.woodDark, 1.15, 0.45, -1.1, 5);
+  const note = box(0.3, 0.24, 0.02, 0xe8dcc0, 1.15, 0.82, -1.05);
+  wip.add(stake, note);
+  g.add(wip);
+
+  // ---- the finished bed: raised frame + dark, deep soil ----
+  const built = new THREE.Group();
+  built.name = 'stage_built';
+  for (const [x, z, rx] of [[0, -1.2, false], [0, 1.2, false], [-1.2, 0, true], [1.2, 0, true]]) {
+    const rail = rx ? box(0.18, 0.34, 2.6, C.woodDark, x, 0.17, z)
+                    : box(2.6, 0.34, 0.18, C.woodDark, x, 0.17, z);
+    rail.castShadow = true; rail.receiveShadow = true;
+    built.add(rail);
   }
-  const l1 = cyl(0.07, 0.07, 0.9, C.woodDark, 0, 0.14, 0, 6); l1.rotation.z = Math.PI / 2; l1.rotation.y = 0.5;
-  const l2 = cyl(0.07, 0.07, 0.9, C.woodDark, 0, 0.14, 0, 6); l2.rotation.z = Math.PI / 2; l2.rotation.y = -0.7;
-  g.add(l1, l2);
-  const flame = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.55, 7),
-    new THREE.MeshLambertMaterial({ color: 0xff8c2a, emissive: 0xff6a00, emissiveIntensity: 1.3 }));
-  flame.position.y = 0.42;
-  const core = new THREE.Mesh(new THREE.ConeGeometry(0.11, 0.34, 6),
-    new THREE.MeshLambertMaterial({ color: 0xffd66e, emissive: 0xffc93c, emissiveIntensity: 1.6 }));
-  core.position.y = 0.38;
-  g.add(flame, core);
+  const soil = box(2.3, 0.3, 2.3, 0x40301f, 0, 0.19, 0);   // darker than field dirt
+  soil.receiveShadow = true;
+  built.add(soil);
+  g.add(built);
+
+  // ---- crop stages, same names Farming.js drives ----
+  const empty = new THREE.Group();
+  empty.name = 'stage_empty';
+  g.add(empty);
+
+  const seeded = new THREE.Group();
+  seeded.name = 'stage_seeded';
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      const sprout = new THREE.Mesh(
+        new THREE.ConeGeometry(0.06, 0.28, 4),
+        new THREE.MeshLambertMaterial({ color: 0x7fb356 })
+      );
+      sprout.position.set(i * 0.62, 0.45, j * 0.62);
+      sprout.castShadow = false;
+      seeded.add(sprout);
+    }
+  }
+  g.add(seeded);
+
+  const grown = new THREE.Group();
+  grown.name = 'stage_grown';
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      const stalk = cyl(0.05, 0.07, 0.72, 0x8fbf5f, i * 0.62, 0.7, j * 0.62, 5);
+      stalk.castShadow = false;
+      const head = new THREE.Mesh(
+        new THREE.SphereGeometry(0.16, 6, 5),
+        new THREE.MeshLambertMaterial({
+          color: 0xe4c25c, emissive: 0x6a5320, emissiveIntensity: 0.35,
+        })
+      );
+      head.position.set(i * 0.62, 1.12, j * 0.62);
+      head.scale.y = 1.5;
+      head.castShadow = false;
+      grown.add(stalk, head);
+    }
+  }
+  g.add(grown);
+
   return g;
 }
 
@@ -365,48 +471,6 @@ function buildChest(bodyColor, bandColor) {
   g.add(box(0.1, 0.75, 0.64, bandColor, -0.28, 0.37, 0));            // straps
   g.add(box(0.1, 0.75, 0.64, bandColor, 0.28, 0.37, 0));
   g.add(box(0.14, 0.16, 0.06, C.gold, 0, 0.5, 0.33));                // clasp
-  return g;
-}
-
-function buildLamp() {
-  const g = new THREE.Group();
-  g.add(cyl(0.06, 0.09, 2.4, 0x3a3a3f, 0, 1.2, 0, 6));
-  const lantern = box(0.3, 0.35, 0.3, C.gold, 0, 2.5, 0);
-  lantern.material = new THREE.MeshLambertMaterial({ color: C.gold, emissive: 0xffb85c, emissiveIntensity: 0.9 });
-  g.add(lantern);
-  const light = new THREE.PointLight(0xffb060, 0.55, 7);
-  light.position.set(0, 2.5, 0);
-  g.add(light);
-  return g;
-}
-
-function buildRock() {
-  const g = new THREE.Group();
-  const r = new THREE.Mesh(new THREE.DodecahedronGeometry(0.55, 0), mat(C.stone));
-  r.position.y = 0.3; r.scale.y = 0.7; r.castShadow = true; r.receiveShadow = true;
-  g.add(r);
-  return g;
-}
-
-function buildRoseBush() {
-  const g = new THREE.Group();
-  const r = new THREE.Mesh(new THREE.DodecahedronGeometry(0.55, 0), mat(C.leaf));
-  r.position.y = 0.3; r.scale.y = 0.7; r.castShadow = true; r.receiveShadow = true;
-  g.add(r);
-  return g;
-}
-
-function buildCrate() {
-  const g = new THREE.Group();
-  g.add(box(0.7, 0.7, 0.7, C.wood, 0, 0.35, 0));
-  g.add(box(0.55, 0.55, 0.55, C.woodDark, 0.5, 0.28, -0.3));
-  return g;
-}
-
-function buildBook() {
-  const g = new THREE.Group();
-  g.add(box(0.7, 0.7, 0.7, C.wood, 0, 0.35, 0));
-  g.add(box(0.55, 0.55, 0.55, C.woodDark, 0.5, 0.28, -0.3));
   return g;
 }
 
@@ -439,19 +503,6 @@ function buildGuard() {
   return g;
 }
 
-function buildMirage() {
-  const g = new THREE.Group();
-  g.add(box(4.5, 2.6, 3.4, C.plasterDark, 0, 1.3, 0));
-  g.add(box(4.7, 0.35, 3.6, C.wood, 0, 2.6, 0));                   // beam line
-  g.add(roof(4.5, 1.8, 3.4, C.roofBlue, 2.78));
-  g.add(box(0.9, 1.4, 0.1, C.woodDark, -1.2, 0.7, 1.73));
-  g.add(box(0.7, 0.7, 0.1, 0x8fb4c9, 0.6, 1.6, 1.72));
-  g.add(box(0.7, 0.7, 0.1, 0x8fb4c9, 1.7, 1.6, 1.72));
-  g.add(cyl(0.28, 0.28, 1.5, C.stoneDark, 1.6, 3.4, -0.8, 6));     // chimney
-  return g;
-}
-
-
 // ---------------- the registry ----------------
 // url:null → placeholder. Set url to a GLB path to swap the art everywhere.
 // fit: 'footprint' scales the model uniformly so its XZ bounding box matches
@@ -459,50 +510,54 @@ function buildMirage() {
 // collider: radius used for simple movement blocking (null = walk-through).
 
 export const ASSET_DEFS = {
-  house_small: { url: 'assets/models/house_small.glb', build: buildHouseSmall, footprint: 3.4,  collider: 2.0 },
-  cattle_farm: { url: 'assets/models/cattle_farm.glb', build: buildCattleFarm, footprint: 3.4,  collider: 2.0 },
-  house_large: { url: 'assets/models/house_large.glb', build: buildHouseLarge, footprint: 4.8,  collider: 2.6 },
-  tavern:      { url: 'assets/models/tavern.glb', build: buildTavern,     footprint: 5.8,  collider: 3.2 },
-  shop_small: { url: 'assets/models/shop_small.glb', build: buildShopSmall, footprint: 3.4,  collider: 2.0 },
-    blacksmith: { url: 'assets/models/blacksmith_shop.glb', build: buildBlacksmith, footprint: 3.4,  collider: 2.0 },
+  house_small: { url: null, build: buildHouseSmall, footprint: 3.4,  collider: 2.0 },
+  house_large: { url: null, build: buildHouseLarge, footprint: 4.8,  collider: 2.6 },
+  tavern:      { url: null, build: buildTavern,     footprint: 5.8,  collider: 3.2 },
   tower:       { url: null, build: buildTower,      footprint: 3.8,  collider: 2.0 },
-  well:        { url: 'assets/models/well.glb', build: buildWell,       footprint: 2.0,  collider: 1.1 },
-  stall:       { url: 'assets/models/shop_stall.glb', build: buildStall,      footprint: 2.8,  collider: 1.4 },
-  fence:       { url: 'assets/models/fence_segment.glb', build: buildFenceSegment,      footprint: 2.8,  collider: 1.4 },
-    fence2:       { url: 'assets/models/fence_2.glb', build: buildFenceSegment2,      footprint: 2.8,  collider: 1.4 },
-  dock:       { url: 'assets/models/dock.glb', build: buildDock,      footprint: 2.8, },
-  wall:       { url: 'assets/models/wall.glb', build: buildWall,      footprint: 2.8,  collider: 1.4 },  
-  stone_face:       { url: 'assets/models/stone_exterior.glb', build: buildStoneFace,      footprint: 2.8,  collider: 1.4 },
-  
-    wall_corner:  { url: 'assets/models/wall_corner_round.glb', build: buildWallCorner,    footprint: 2.5, collider: 0.55 },
-  tree_pine:   { url: null, build: buildTree,       footprint: 2.2,  collider: 0.4 },
-  tree_round:  { url: null, build: buildTreeRound,  footprint: 2.3,  collider: 0.4 },
-  lamp:        { url: null, build: buildLamp,       footprint: 0.6,  collider: 0.25 },
-  rock:        { url: null, build: buildRock,       footprint: 1.1,  collider: 0.6 },
-  rosebush:    { url: 'assets/models/rose_bush.glb', build: buildRoseBush,       footprint: 1.1,  collider: 0.6 },
-  crate:       { url: 'assets/models/crates.glb', build: buildCrate,      footprint: 1.2,  collider: 0.6 },
-  book_pickup:       { url: 'assets/models/book.glb', build: buildBook,      footprint: 1.2,  collider: 0.6 },
-  // farm plots: ONE object holding three stage groups (stage_empty /
-  // stage_seeded / stage_grown); Farming.js toggles their visibility as
-  // the crop matures. Walk-through so you can stand in the rows.
-  farm_plot:   { url: null, build: buildFarmPlot,   footprint: 2.4,  collider: null, mapColor: '#7a6034' },
-  // cook spot: stand within 3.5m of one to cook raw fish (the tavern
-  // hearth also counts). Without this, cooking only works at the tavern.
-  campfire:    { url: null, build: buildCampfire,   footprint: 1.4,  collider: 0.6 },
-  // containers: `container` names the loot table (data/loot.json) —
-  // that's the flag that makes an asset openable by players
-  chest_wood:  { url: 'assets/models/wooden_chest.glb', build: () => buildChest(0x7a5230, 0x5c3d22), footprint: 1.0, collider: 0.55, container: 'common' },
+  well:        { url: null, build: buildWell,       footprint: 2.0,  collider: 1.1 },
+  stall:       { url: null, build: buildStall,      footprint: 2.8,  collider: 1.4 },
+  // `instanced` — all placements of this asset render as ONE draw call per
+  //   part via InstancedMesh (they stay individually editable in the editor).
+  // `noCastShadow` — small props skip the shadow pass entirely.
+  tree_pine:   { url: null, build: buildTree,       footprint: 2.2,  collider: 0.4, instanced: true },
+  tree_round:  { url: null, build: buildTreeRound,  footprint: 2.3,  collider: 0.4, instanced: true },
+  lamp:        { url: null, build: buildLamp,       footprint: 0.6,  collider: 0.25, instanced: true, noCastShadow: true },
+  rock:        { url: null, build: buildRock,       footprint: 1.1,  collider: 0.6,  instanced: true, noCastShadow: true },
+  crate:       { url: null, build: buildCrate,      footprint: 1.2,  collider: 0.6,  instanced: true, noCastShadow: true },
+  // containers: `container` names the loot table (data/loot.json) — that's
+  // the flag that makes an asset openable by players
+  chest_wood:  { url: null, build: () => buildChest(0x7a5230, 0x5c3d22), footprint: 1.0, collider: 0.55, container: 'common' },
   chest_iron:  { url: null, build: () => buildChest(0x6a7076, 0xc9a24b), footprint: 1.0, collider: 0.55, container: 'rare' },
+  // cook spot: stand near one to cook raw fish from the inventory
+  campfire:    { url: null, build: buildCampfire,   footprint: 1.4,  collider: 0.6,  noCastShadow: true },
+  // the mirage: spawned/managed by Mirage.js, walk-through (it isn't quite real)
+  magick_cave: { url: null, build: buildMagickCave, footprint: 4.6,  collider: null, noCastShadow: true },
+  // lore books: spawned/managed by Bibliofolio.js
+  book_pickup: { url: null, build: buildBookPickup, footprint: 0.5,  collider: null, noCastShadow: true },
+  // farm plot: one object, three stages toggled by Farming.js
+  farm_plot:   { url: null, build: buildFarmPlot,   footprint: 2.4,  collider: null, noCastShadow: true, mapColor: '#7a6034' },
+  // Odell's garden bed — richer soil, but half-built until you've done
+  // his run of work. Farming.js toggles stage_locked / stage_built.
+  garden_bed:  { url: null, build: buildGardenBed,  footprint: 2.8,  collider: null, noCastShadow: true, mapColor: '#4a3a22' },
+  // ---- the stone circle ----
+  // Six standing stones, each its own asset id so the editor places them
+  // individually. `stone` names the symbol the server expects back in
+  // submit_stone_order — StonePuzzle.js reads it from here.
+  stone_water: { url: null, build: () => buildRuneStone(0x5aa9c9), footprint: 1.2, collider: null, stone: 'water' },
+  stone_door:  { url: null, build: () => buildRuneStone(0xc9a24b), footprint: 1.2, collider: null, stone: 'door' },
+  stone_ember: { url: null, build: () => buildRuneStone(0xc9603c), footprint: 1.2, collider: null, stone: 'ember' },
+  stone_root:  { url: null, build: () => buildRuneStone(0x6f9c4a), footprint: 1.2, collider: null, stone: 'root' },
+  stone_eye:   { url: null, build: () => buildRuneStone(0xa88cff), footprint: 1.2, collider: null, stone: 'eye' },
+  stone_moon:  { url: null, build: () => buildRuneStone(0xd8d2e8), footprint: 1.2, collider: null, stone: 'moon' },
+  // the library's inner room: the Book of Names (see Library.js)
+  pedestal_book: { url: null, build: buildPedestalBook, footprint: 1.0, collider: 0.5 },
+  // the herald: spawned by StonePuzzle.js on a win, never placed by hand
+  char_host:     { url: null, build: buildHost,         footprint: 0.9, collider: null },
   // characters are assets too — swap in a rigged GLB later
   char_player: { url: null, build: () => buildCharacter(0x4a7dbd), footprint: 0.9, collider: null },
   char_remote: { url: null, build: () => buildCharacter(0xbd6a4a), footprint: 0.9, collider: null },
   char_npc:    { url: null, build: () => buildCharacter(0x6a8f5a), footprint: 0.9, collider: null },
   char_guard:  { url: null, build: buildGuard,                     footprint: 0.9, collider: null },
-  mirage: { url: 'assets/models/mirage_cave.glb', build: buildMirage, footprint: 4.8,  collider: 2.6 },
-  // Mirage.js requests 'magick_cave' by that exact id — without this entry
-  // the cave renders as the magenta fallback cube. Same art as `mirage`
-  // above; collider null so you can walk into the mouth to enter it.
-  magick_cave: { url: 'assets/models/mirage_cave.glb', build: buildMirage, footprint: 4.8, collider: null },
 };
 
 export class AssetRegistry {
@@ -592,7 +647,7 @@ export class AssetRegistry {
       clone.traverse(o => { if (o.isMesh) o.castShadow = false; });
       const blob = new THREE.Mesh(
         new THREE.CircleGeometry(0.42, 16),
-                                  new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.28, depthWrite: false })
+        new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.28, depthWrite: false })
       );
       blob.rotation.x = -Math.PI / 2;
       blob.position.y = 0.025;

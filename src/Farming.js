@@ -107,14 +107,17 @@ export class Farming {
     this._buildUI();
   }
 
+  /** Key prefix marks the bed type — the server reads 'garden@' to
+   *  apply the richer yield, and refuses it until the bed is built. */
   static keyFor(rec) {
-    return `plot@${rec.data.x},${rec.data.z}`;
+    const kind = rec.data.asset === 'garden_bed' ? 'garden' : 'plot';
+    return `${kind}@${rec.data.x},${rec.data.z}`;
   }
 
   async init() {
     // index every farm plot placed in the world
     for (const rec of this.world.placed) {
-      if (rec.data.asset === 'farm_plot' && rec.obj) {
+      if ((rec.data.asset === 'farm_plot' || rec.data.asset === 'garden_bed') && rec.obj) {
         this.recs.set(Farming.keyFor(rec), rec);
       }
     }
@@ -134,7 +137,8 @@ export class Farming {
   async refresh() {
     const { data, error } = await this.server.supa.rpc('get_plots');
     if (error) { console.warn('[Farming] plot load failed', error); return; }
-    this.plots = data ?? {};
+    this.plots = data?.plots ?? {};
+    this.gardenUnlocked = !!data?.garden_unlocked;
     this._applyStages();
     if (this.current) this._renderPanel();
   }
@@ -142,6 +146,7 @@ export class Farming {
   // ---------------- stage derivation ----------------
   /** empty | seeded | grown — a pure function of elapsed time. */
   stageOf(key) {
+    if (key.startsWith('garden@') && !this.gardenUnlocked) return 'locked';
     const p = this.plots[key];
     if (!p?.crop) return 'empty';
     const elapsedH = (Date.now() - new Date(p.seeded_at).getTime()) / 3600000;
@@ -151,7 +156,10 @@ export class Farming {
   _applyStages() {
     for (const [key, rec] of this.recs) {
       const stage = this.stageOf(key);
+      const locked = stage === 'locked';
       rec.obj.traverse(o => {
+        if (o.name === 'stage_locked') o.visible = locked;
+        if (o.name === 'stage_built')  o.visible = !locked;
         if (o.name === 'stage_empty')  o.visible = stage === 'empty';
         if (o.name === 'stage_seeded') o.visible = stage === 'seeded';
         if (o.name === 'stage_grown')  o.visible = stage === 'grown';
@@ -239,7 +247,9 @@ export class Farming {
       this._toast('🥀 Withered. The soil forgives; it does not forget.');
     } else {
       const name = this.inventory.itemDefs[data.crop]?.name ?? data.crop;
-      this._toast(`🌾 Harvested ${data.yield} × ${name}.`);
+      this._toast(data.bonus
+        ? `🌾 Harvested ${data.yield} × ${name} — the bed gave an extra.`
+        : `🌾 Harvested ${data.yield} × ${name}.`);
     }
   }
 
@@ -249,6 +259,18 @@ export class Farming {
     if (!key) return;
     const stage = this.stageOf(key);
     const p = this.plots[key];
+    const isGarden = key.startsWith('garden@');
+
+    if (stage === 'locked') {
+      this.panel.innerHTML = `
+        <div class="fhead"><span class="ftitle">Unfinished Bed</span>
+          <button class="fclose" data-act="close">✕</button></div>
+        <div class="fstatus">Rails half-laid, timber stacked loose, a scrap of
+          plan tied to a stake. Odell means to finish it — for someone who has
+          earned it.</div>
+        <div class="fmeta">Ask the farmer about his work.</div>`;
+      return;
+    }
 
     if (stage === 'empty') {
       const lvl = this.skills?.level('farming') ?? 1;
@@ -264,9 +286,11 @@ export class Farming {
         </div>`;
       }).join('');
       this.panel.innerHTML = `
-        <div class="fhead"><span class="ftitle">Empty Plot</span>
+        <div class="fhead"><span class="ftitle">${isGarden ? 'Garden Bed' : 'Empty Plot'}</span>
           <button class="fclose" data-act="close">✕</button></div>
-        <div class="fstatus">Turned soil, waiting on a seed.</div>
+        <div class="fstatus">${isGarden
+          ? 'Deep, dark, well-turned soil. Things come up better here.'
+          : 'Turned soil, waiting on a seed.'}</div>
         ${rows}`;
     } else {
       const cropName = this.inventory.itemDefs[p.crop]?.name ?? p.crop;
@@ -276,7 +300,8 @@ export class Farming {
       const ready = stage === 'grown';
       const thirst = p.water_count < p.waterings;
       this.panel.innerHTML = `
-        <div class="fhead"><span class="ftitle">${ready ? 'Harvestable Plot' : 'Seeded Plot'}</span>
+        <div class="fhead"><span class="ftitle">${
+          (ready ? 'Harvestable' : 'Seeded') + (isGarden ? ' Garden Bed' : ' Plot')}</span>
           <button class="fclose" data-act="close">✕</button></div>
         <div class="fstatus">${cropName} — ${ready
           ? 'ripe and ready.'

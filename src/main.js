@@ -24,6 +24,9 @@ import { PlayerCard } from './PlayerCard.js';
 import { Bibliofolio } from './Bibliofolio.js';
 import { Farming } from './Farming.js';
 import { Shop } from './Shop.js';
+import { StonePuzzle } from './StonePuzzle.js';
+import { Library } from './Library.js';
+import { GardenQuest } from './GardenQuest.js';
 import { Auth } from './Auth.js';
 import { ServerCharacter } from './ServerCharacter.js';
 import { CharacterCreate } from './CharacterCreate.js';
@@ -116,7 +119,7 @@ const registry = new AssetRegistry();
 const world = new World(scene, registry);
 const rig = new CameraRig(camera, canvas, CONFIG.CAMERA);
 
-let player, remotes, net, editor, interactions, inventory, containers, roles, tasks, brain, skills, mirage, mapView, biblio, farming, shop;
+let player, remotes, net, editor, interactions, inventory, containers, roles, tasks, brain, skills, mirage, mapView, biblio, farming, shop, stones, library, gardenQuest;
 
 async function boot() {
   // Optional model assignments — swap placeholders for your GLBs without
@@ -209,6 +212,19 @@ async function boot() {
   shop = new Shop({ server, inventory, onSay: (msg) => interactions._say(msg) });
   await shop.init();
 
+  stones = new StonePuzzle({ world, registry, server, camera });
+  await stones.init();
+
+  library = new Library({ world, registry, server, camera, stones });
+  await library.init();
+
+  gardenQuest = new GardenQuest({
+    server, inventory, farming, onSay: (msg) => interactions._say(msg),
+  });
+
+  // ---- clue sources: the puzzle listens to the rest of the game ----
+  // Each of these is something a player already does; if that source
+  // still holds one of their clues, it surfaces now.
   // ---- book collection persistence ----
   // Skills, inventory, and gold are authoritative on the server (see
   // ServerCharacter). Books are the one piece still client-owned, so they
@@ -242,6 +258,11 @@ async function boot() {
     // stock in shops.json, and buy_item on the server sets the real price
     if (actionId === 'trade' && npc.shop && shop.has(npc.shop)) {
       shop.open(npc.shop);
+      return;
+    }
+    // Odell's run of work — finishing it builds the garden bed
+    if (actionId === 'quest' && npc.role === 'Farmer') {
+      gardenQuest.open();
       return;
     }
     interactions._say(`(${actionId} isn't wired up yet — hook it in Interactions.onAction.)`);
@@ -346,6 +367,7 @@ function handleTap(clientX, clientY) {
   containers?.close();
   farming?.close();
   shop?.close();
+  gardenQuest?.close();
 
   // the mirage: tap to approach, enter when close
   if (mirage?.isVisible && mirage.pick(clientX, clientY)) {
@@ -357,6 +379,35 @@ function handleTap(clientX, clientY) {
       player.setMoveTarget(new THREE.Vector3(player.pos.x + dir.x, 0, player.pos.z + dir.z));
     } else {
       mirage.enter();
+    }
+    return;
+  }
+
+  // the library pedestal: the Book of Names
+  const ped = library?.pick(clientX, clientY);
+  if (ped) {
+    const dist = Math.hypot(ped.data.x - player.pos.x, ped.data.z - player.pos.z);
+    if (dist > 2.4) {
+      player.setMoveTarget(new THREE.Vector3(ped.data.x, 0, ped.data.z));
+    } else {
+      library.open();
+    }
+    return;
+  }
+
+  if (stones?.isDragging) return;
+  stones?.closeMenu();
+  // the stone circle: walk over, then lift and drag stones into sockets
+  const stoneSym = stones?.pick(clientX, clientY);
+  if (stoneSym) {
+    const sp = stones.positionOf(stoneSym);
+    if (sp) {
+      const dist = Math.hypot(sp.x - player.pos.x, sp.z - player.pos.z);
+      if (dist > 5) {
+        player.setMoveTarget(new THREE.Vector3(sp.x, 0, sp.z));
+      } else {
+        stones.openMenu(stoneSym, clientX, clientY);
+      }
     }
     return;
   }
@@ -445,6 +496,7 @@ function loop(now) {
   mirage.update(Date.now());
   biblio.update(Date.now());
   farming.update(Date.now());
+  stones?.update(Date.now());
   mapView.draw(Date.now());
   remotes.update(Date.now());
 
