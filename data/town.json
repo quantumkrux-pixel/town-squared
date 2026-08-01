@@ -901,6 +901,66 @@
       "rotY": 1.57,
       "scale": 1.77,
       "y": 0.1
+    },
+    {
+      "asset": "farm_plot",
+      "x": -63.5,
+      "z": 12,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -65.5,
+      "z": 12,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -63.5,
+      "z": 14,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -65.5,
+      "z": 14,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -63.5,
+      "z": 10,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_plot",
+      "x": -65.5,
+      "z": 10,
+      "rotY": 0
+    },
+    {
+      "asset": "fence2",
+      "x": -67.5,
+      "z": 18,
+      "rotY": 1.57,
+      "scale": 1.77,
+      "y": 0.1
+    },
+    {
+      "asset": "fence2",
+      "x": -38.5,
+      "z": 21.5,
+      "rotY": 1.54,
+      "scale": 1.77,
+      "y": 0.1
+    },
+    {
+      "asset": "fence2",
+      "x": -38.5,
+      "z": 26.5,
+      "rotY": 1.54,
+      "scale": 1.77,
+      "y": 0.1
     }
   ],
   "npcs": [
