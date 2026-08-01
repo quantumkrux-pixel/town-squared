@@ -139,5 +139,11 @@
     "icon": "⛏️",
     "stack": 1,
     "desc": "Breaks the soil properly. Every harvest comes up a little richer."
+  },
+  "stone_sigil": {
+    "name": "Stone Sigil",
+    "icon": "🗿",
+    "stack": 1,
+    "desc": "Six marks in a ring, cut in the right order. Proof you listened."
   }
 }

@@ -261,7 +261,7 @@
       "x": 6,
       "z": -5.5,
       "rotY": 7.85,
-      "scale": 1.77
+      "scale": 1.95
     },
     {
       "asset": "well",
@@ -430,16 +430,9 @@
       "rotY": 0
     },
     {
-      "asset": "cattle_farm",
-      "x": -51.5,
-      "z": 30.5,
-      "rotY": 3.06,
-      "scale": 6.11
-    },
-    {
       "asset": "wall_corner",
-      "x": -24,
-      "z": -25.5,
+      "x": -22.5,
+      "z": -27,
       "rotY": 0,
       "scale": 1.95
     },
@@ -466,22 +459,22 @@
     },
     {
       "asset": "wall",
-      "x": -28.5,
-      "z": -6.5,
+      "x": -26.5,
+      "z": -8.5,
       "rotY": -1.57,
       "scale": 2.59
     },
     {
       "asset": "wall",
-      "x": -25.5,
-      "z": -20.5,
+      "x": -24,
+      "z": -21.5,
       "rotY": -1.83,
       "scale": 2.59
     },
     {
       "asset": "wall",
-      "x": -27.5,
-      "z": -13.5,
+      "x": -25.5,
+      "z": -15,
       "rotY": -1.83,
       "scale": 2.59
     },
@@ -573,7 +566,7 @@
     {
       "asset": "mirage",
       "x": -94.5,
-      "z": -42,
+      "z": -42.5,
       "rotY": 0,
       "scale": 1.21
     },
@@ -637,7 +630,7 @@
     },
     {
       "asset": "rock",
-      "x": -88.5,
+      "x": -91,
       "z": -35,
       "rotY": 0,
       "scale": 1.46
@@ -746,75 +739,87 @@
     },
     {
       "asset": "farm_plot",
-      "x": -43,
-      "z": 16,
-      "rotY": 0
+      "x": -46,
+      "z": 15.5,
+      "rotY": 0,
+      "y": -0.2
+    },
+    {
+      "asset": "farm_plot",
+      "x": -50,
+      "z": 15.5,
+      "rotY": 0,
+      "y": -0.2
+    },
+    {
+      "asset": "farm_plot",
+      "x": -48,
+      "z": 15.5,
+      "rotY": 0,
+      "y": -0.2
+    },
+    {
+      "asset": "farm_plot",
+      "x": -51,
+      "z": 13.5,
+      "rotY": 0,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
       "x": -47,
-      "z": 16,
-      "rotY": 0
+      "z": 13.5,
+      "rotY": 0,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
-      "x": -45,
-      "z": 16,
-      "rotY": 0
+      "x": -49,
+      "z": 13.5,
+      "rotY": 0,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
-      "x": -48.5,
-      "z": 12,
-      "rotY": 0
+      "x": -55.5,
+      "z": 15.5,
+      "rotY": 0,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
-      "x": -44.5,
-      "z": 12,
-      "rotY": 0
+      "x": -57.5,
+      "z": 15.5,
+      "rotY": 0,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
-      "x": -46.5,
-      "z": 12,
-      "rotY": 0
-    },
-    {
-      "asset": "farm_plot",
-      "x": -53,
-      "z": 16,
-      "rotY": 0
-    },
-    {
-      "asset": "farm_plot",
-      "x": -55,
-      "z": 16,
-      "rotY": 0
-    },
-    {
-      "asset": "farm_plot",
-      "x": -57,
-      "z": 16,
-      "rotY": 0
+      "x": -53.5,
+      "z": 15.5,
+      "rotY": 0,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
       "x": -54.5,
-      "z": 12,
-      "rotY": 0
+      "z": 13.5,
+      "rotY": 0,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
       "x": -56.5,
-      "z": 12,
-      "rotY": 0
+      "z": 13.5,
+      "rotY": 0,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
       "x": -58.5,
-      "z": 12,
-      "rotY": 0
+      "z": 13.5,
+      "rotY": 0,
+      "y": -0.2
     },
     {
       "asset": "fence2",
@@ -904,39 +909,38 @@
     },
     {
       "asset": "farm_plot",
-      "x": -63.5,
-      "z": 12,
-      "rotY": 0
+      "x": -64.5,
+      "z": 10.5,
+      "rotY": -1.57,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
-      "x": -65.5,
-      "z": 12,
-      "rotY": 0
+      "x": -66,
+      "z": 10.5,
+      "rotY": -1.57,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
-      "x": -63.5,
-      "z": 14,
-      "rotY": 0
+      "x": -64.5,
+      "z": 13.5,
+      "rotY": -1.57,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
-      "x": -65.5,
-      "z": 14,
-      "rotY": 0
+      "x": -66,
+      "z": 13.5,
+      "rotY": -1.57,
+      "y": -0.2
     },
     {
       "asset": "farm_plot",
-      "x": -63.5,
-      "z": 10,
-      "rotY": 0
-    },
-    {
-      "asset": "farm_plot",
-      "x": -65.5,
-      "z": 10,
-      "rotY": 0
+      "x": -66,
+      "z": 8.5,
+      "rotY": -1.57,
+      "y": -0.2
     },
     {
       "asset": "fence2",
@@ -961,6 +965,216 @@
       "rotY": 1.54,
       "scale": 1.77,
       "y": 0.1
+    },
+    {
+      "asset": "lamp",
+      "x": -40.5,
+      "z": -2.5,
+      "rotY": 0
+    },
+    {
+      "asset": "lamp",
+      "x": -29,
+      "z": 2.5,
+      "rotY": 0
+    },
+    {
+      "asset": "lamp",
+      "x": -29,
+      "z": -2,
+      "rotY": 0
+    },
+    {
+      "asset": "lamp",
+      "x": -40.5,
+      "z": 2.5,
+      "rotY": 0
+    },
+    {
+      "asset": "lamp",
+      "x": -34.5,
+      "z": 2.5,
+      "rotY": 0
+    },
+    {
+      "asset": "lamp",
+      "x": -34.5,
+      "z": -2.5,
+      "rotY": 0
+    },
+    {
+      "asset": "tree_round",
+      "x": -64.5,
+      "z": 22,
+      "rotY": 0,
+      "scale": 1.1
+    },
+    {
+      "asset": "tree_round",
+      "x": -66,
+      "z": 20.5,
+      "rotY": -0.52,
+      "scale": 1.1
+    },
+    {
+      "asset": "tree_round",
+      "x": -81.5,
+      "z": 25,
+      "rotY": 0
+    },
+    {
+      "asset": "tree_round",
+      "x": -91.5,
+      "z": 31,
+      "rotY": 0
+    },
+    {
+      "asset": "mirage",
+      "x": -75,
+      "z": -45,
+      "rotY": -6.81
+    },
+    {
+      "asset": "mirage",
+      "x": -72.5,
+      "z": -42,
+      "rotY": 3.4,
+      "y": 2.9
+    },
+    {
+      "asset": "mirage",
+      "x": -78.5,
+      "z": -45,
+      "rotY": -3.14,
+      "y": 3.7
+    },
+    {
+      "asset": "mirage",
+      "x": -78,
+      "z": -45,
+      "rotY": -2.88
+    },
+    {
+      "asset": "mirage",
+      "x": -84.5,
+      "z": -45,
+      "rotY": -2.62
+    },
+    {
+      "asset": "mirage",
+      "x": -81,
+      "z": -45,
+      "rotY": -2.62,
+      "y": 2.3
+    },
+    {
+      "asset": "mirage",
+      "x": -85.5,
+      "z": -45,
+      "rotY": -2.62,
+      "y": 2.7
+    },
+    {
+      "asset": "farm_plot",
+      "x": -66,
+      "z": 15.5,
+      "rotY": -1.57,
+      "y": -0.2
+    },
+    {
+      "asset": "farm_plot",
+      "x": -64.5,
+      "z": 15.5,
+      "rotY": -1.57,
+      "y": -0.2
+    },
+    {
+      "asset": "farm_plot",
+      "x": -64.5,
+      "z": 8.5,
+      "rotY": -1.57,
+      "y": -0.2
+    },
+    {
+      "asset": "cattle_farm",
+      "x": -49.5,
+      "z": 28,
+      "rotY": -2.62,
+      "scale": 3.8
+    },
+    {
+      "asset": "mirage",
+      "x": -71,
+      "z": -45,
+      "rotY": -2.88
+    },
+    {
+      "asset": "mirage",
+      "x": -79.5,
+      "z": -43.5,
+      "rotY": -2.62,
+      "y": 1.6
+    },
+    {
+      "asset": "mirage",
+      "x": -69.5,
+      "z": -43.5,
+      "rotY": -2.88,
+      "y": 2.3
+    },
+    {
+      "asset": "garden_bed",
+      "x": -63,
+      "z": 19.0,
+      "rotY": 0
+    },
+    {
+      "asset": "stone_water",
+      "x": -80.0,
+      "z": 7.5,
+      "rotY": 3.14
+    },
+    {
+      "asset": "stone_door",
+      "x": -73.5,
+      "z": 11.25,
+      "rotY": 2.09
+    },
+    {
+      "asset": "stone_ember",
+      "x": -73.5,
+      "z": 18.75,
+      "rotY": 1.05
+    },
+    {
+      "asset": "stone_root",
+      "x": -80.0,
+      "z": 22.5,
+      "rotY": 0.0
+    },
+    {
+      "asset": "stone_eye",
+      "x": -86.5,
+      "z": 18.75,
+      "rotY": -1.05
+    },
+    {
+      "asset": "stone_moon",
+      "x": -86.5,
+      "z": 11.25,
+      "rotY": -2.09
+    },
+    {
+      "asset": "pedestal_book",
+      "x": -24,
+      "z": -6,
+      "rotY": 0
+    },
+    {
+      "asset": "garden_bed",
+      "x": -60,
+      "z": 19.0,
+      "rotY": 0
     }
   ],
   "npcs": [
@@ -1007,7 +1221,8 @@
           0,
           8
         ]
-      ]
+      ],
+      "shop": "baker"
     },
     {
       "name": "Old Shea",
@@ -1159,6 +1374,43 @@
         [
           23,
           0
+        ]
+      ]
+    },
+    {
+      "name": "Odell the Farmer",
+      "asset": "char_npc",
+      "speed": 0.9,
+      "role": "Farmer",
+      "shop": "farmer",
+      "interactions": [
+        "talk",
+        "trade",
+        "quest"
+      ],
+      "dialogue": [
+        "Seeds in the ground beat coin in the pocket. Slower, mind.",
+        "Water it twice and leave it be. Drowning's the commonest way to kill a thing that's trying.",
+        "Moonpetal? Aye, I stock it. Two days and a steady hand. Not for beginners.",
+        "That bed at the end of the row? Half-built. It'll stay that way till someone earns the timber.",
+        "The mill's quiet, so I cart my grain east now. Costs me a day's walk."
+      ],
+      "path": [
+        [
+          -62,
+          17.5
+        ],
+        [
+          -52,
+          17.5
+        ],
+        [
+          -52,
+          7
+        ],
+        [
+          -62,
+          7
         ]
       ]
     }
