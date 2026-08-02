@@ -89,6 +89,18 @@ function buildHouseSmall() {
   return g;
 }
 
+function buildFarmHouse() {
+  const g = new THREE.Group();
+  g.add(box(4.5, 2.6, 3.4, C.plasterDark, 0, 1.3, 0));
+  g.add(box(4.7, 0.35, 3.6, C.wood, 0, 2.6, 0));                   // beam line
+  g.add(roof(4.5, 1.8, 3.4, C.roofBlue, 2.78));
+  g.add(box(0.9, 1.4, 0.1, C.woodDark, -1.2, 0.7, 1.73));
+  g.add(box(0.7, 0.7, 0.1, 0x8fb4c9, 0.6, 1.6, 1.72));
+  g.add(box(0.7, 0.7, 0.1, 0x8fb4c9, 1.7, 1.6, 1.72));
+  g.add(cyl(0.28, 0.28, 1.5, C.stoneDark, 1.6, 3.4, -0.8, 6));     // chimney
+  return g;
+}
+
 function buildHouseLarge() {
   const g = new THREE.Group();
   g.add(box(4.5, 2.6, 3.4, C.plasterDark, 0, 1.3, 0));
@@ -129,6 +141,45 @@ function buildWell() {
   g.add(box(0.12, 1.6, 0.12, C.wood, -0.75, 1.2, 0));
   g.add(box(0.12, 1.6, 0.12, C.wood, 0.75, 1.2, 0));
   g.add(roof(1.6, 0.6, 1.2, C.roofRed, 2.0, 0.1));
+  return g;
+}
+
+function buildFenceSegment() {
+  const g = new THREE.Group();
+  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
+  const awn = box(2.8, 0.08, 1.8, C.woodDark, 1.1, 1.0, -0.5);
+  awn.rotation.x = -0.18;
+  g.add(awn);
+  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
+  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
+  return g;
+}
+
+function buildFenceSegment2() {
+  const g = new THREE.Group();
+  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
+  const awn = box(2.8, 0.08, 1.8, C.woodDark, 1.1, 1.0, -0.5);
+  awn.rotation.x = -0.18;
+  g.add(awn);
+  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
+  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
+  return g;
+}
+
+function buildDock() {
+  const g = new THREE.Group();
+  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
+  const awn = box(2.8, 0.08, 1.8, C.woodDark, 1.1, 1.0, -0.5);
+  awn.rotation.x = -0.18;
+  g.add(awn);
+  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
+  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
   return g;
 }
 
@@ -175,6 +226,14 @@ function buildLamp() {
 }
 
 function buildRock() {
+  const g = new THREE.Group();
+  const r = new THREE.Mesh(new THREE.DodecahedronGeometry(0.55, 0), mat(C.stone));
+  r.position.y = 0.3; r.scale.y = 0.7; r.castShadow = true; r.receiveShadow = true;
+  g.add(r);
+  return g;
+}
+
+function buildRoseBush() {
   const g = new THREE.Group();
   const r = new THREE.Mesh(new THREE.DodecahedronGeometry(0.55, 0), mat(C.stone));
   r.position.y = 0.3; r.scale.y = 0.7; r.castShadow = true; r.receiveShadow = true;
@@ -487,6 +546,44 @@ function buildCharacter(color = 0x4a7dbd) {
   return g;
 }
 
+function buildStoneFace() {
+  const g = new THREE.Group();
+  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
+  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
+  const awn = box(2.8, 0.08, 1.8, C.cloth, 0, 2.05, 0.1);
+  awn.rotation.x = -0.18;
+  g.add(awn);
+  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
+  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
+  return g;
+
+function buildShopSmall() {
+  const g = new THREE.Group();
+  g.add(box(5.5, 3.0, 4.2, C.wood, 0, 1.5, 0));
+  g.add(box(5.7, 0.3, 4.4, C.woodDark, 0, 3.0, 0));
+  g.add(roof(5.5, 2.1, 4.2, C.roofPurple, 3.15));
+  g.add(box(1.1, 1.6, 0.12, C.woodDark, 0, 0.8, 2.14));
+  // hanging sign
+  g.add(box(1.4, 0.08, 0.08, C.woodDark, 2.2, 2.5, 2.35));
+  g.add(box(0.9, 0.6, 0.06, C.gold, 2.4, 2.05, 2.35));
+  g.add(cyl(0.3, 0.3, 1.8, C.stoneDark, -2.0, 4.0, -1.2, 6));
+  return g;
+}
+
+function buildBlacksmith() {
+  const g = new THREE.Group();
+  g.add(box(5.5, 3.0, 4.2, C.wood, 0, 1.5, 0));
+  g.add(box(5.7, 0.3, 4.4, C.woodDark, 0, 3.0, 0));
+  g.add(roof(5.5, 2.1, 4.2, C.roofPurple, 3.15));
+  g.add(box(1.1, 1.6, 0.12, C.woodDark, 0, 0.8, 2.14));
+  // hanging sign
+  g.add(box(1.4, 0.08, 0.08, C.woodDark, 2.2, 2.5, 2.35));
+  g.add(box(0.9, 0.6, 0.06, C.gold, 2.4, 2.05, 2.35));
+  g.add(cyl(0.3, 0.3, 1.8, C.stoneDark, -2.0, 4.0, -1.2, 6));
+  return g;
+}
+  
 function buildGuard() {
   const g = buildCharacter(0x5a6470);                      // steel-grey tabard
   // helmet instead of hood: replace the cone with a rounded cap + plume
@@ -511,18 +608,26 @@ function buildGuard() {
 
 export const ASSET_DEFS = {
   house_small: { url: null, build: buildHouseSmall, footprint: 3.4,  collider: 2.0 },
+  farmhouse: { url: null, build: buildFarmHouse, footprint: 4.8,  collider: 2.6 },
   house_large: { url: null, build: buildHouseLarge, footprint: 4.8,  collider: 2.6 },
   tavern:      { url: null, build: buildTavern,     footprint: 5.8,  collider: 3.2 },
   tower:       { url: null, build: buildTower,      footprint: 3.8,  collider: 2.0 },
   well:        { url: null, build: buildWell,       footprint: 2.0,  collider: 1.1 },
   stall:       { url: null, build: buildStall,      footprint: 2.8,  collider: 1.4 },
+  dock:        { url: null, build: buildDock, footprint: 3.4,  collider: 2.0 },
+  shop_small: { url: null, build: buildShopSmall, footprint: 3.4,  collider: 2.0 },
+  blacksmith: { url: null, build: buildBlacksmith, footprint: 3.4,  collider: 2.0 },
   // `instanced` — all placements of this asset render as ONE draw call per
   //   part via InstancedMesh (they stay individually editable in the editor).
   // `noCastShadow` — small props skip the shadow pass entirely.
+  stone_face:  { url: null, build: buildStoneFace,      footprint: 2.8,  collider: 1.4, instanced: true },
+  fence:       { url: null, build: buildFenceSegment,      footprint: 2.8,  collider: 1.4, instanced: true },
+  fence2:      { url: null, build: buildFenceSegment2,      footprint: 2.8,  collider: 1.4, instanced: true },
   tree_pine:   { url: null, build: buildTree,       footprint: 2.2,  collider: 0.4, instanced: true },
   tree_round:  { url: null, build: buildTreeRound,  footprint: 2.3,  collider: 0.4, instanced: true },
   lamp:        { url: null, build: buildLamp,       footprint: 0.6,  collider: 0.25, instanced: true, noCastShadow: true },
   rock:        { url: null, build: buildRock,       footprint: 1.1,  collider: 0.6,  instanced: true, noCastShadow: true },
+  rosebush:    { url: null, build: buildRoseBush,   footprint: 1.1,  collider: 0.6,  instanced: true, noCastShadow: true },
   crate:       { url: null, build: buildCrate,      footprint: 1.2,  collider: 0.6,  instanced: true, noCastShadow: true },
   // containers: `container` names the loot table (data/loot.json) — that's
   // the flag that makes an asset openable by players
