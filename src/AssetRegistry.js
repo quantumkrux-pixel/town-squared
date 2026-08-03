@@ -89,7 +89,7 @@ function buildHouseSmall() {
   return g;
 }
 
-function buildFarmHouse() {
+function buildBarn() {
   // a barn: long, red, with a hay door in the gable
   const g = new THREE.Group();
   g.add(box(6.5, 3.2, 4.6, 0x8c3b32, 0, 1.6, 0));
@@ -271,13 +271,6 @@ function buildRoseBush() {
 }
 
 function buildCrate() {
-  const g = new THREE.Group();
-  g.add(box(0.7, 0.7, 0.7, C.wood, 0, 0.35, 0));
-  g.add(box(0.55, 0.55, 0.55, C.woodDark, 0.5, 0.28, -0.3));
-  return g;
-}
-
-function buildHorse() {
   const g = new THREE.Group();
   g.add(box(0.7, 0.7, 0.7, C.wood, 0, 0.35, 0));
   g.add(box(0.55, 0.55, 0.55, C.woodDark, 0.5, 0.28, -0.3));
@@ -592,6 +585,102 @@ function buildWallCorner() {
   return g;
 }
 
+function buildFarmHouse() {
+  // the farmer's dwelling: squat, whitewashed, with a working chimney
+  const g = new THREE.Group();
+  g.add(box(5.0, 2.7, 4.0, C.plaster, 0, 1.35, 0));
+  g.add(box(5.2, 0.26, 4.2, C.woodDark, 0, 2.7, 0));
+  g.add(roof(5.0, 1.9, 4.0, C.roofRed, 2.8));
+  // porch: two posts and a lean-to over the door
+  g.add(box(1.1, 1.9, 0.14, C.woodDark, 0, 0.95, 2.06));         // door
+  g.add(cyl(0.09, 0.09, 2.0, C.woodDark, -1.0, 1.0, 3.0, 6));
+  g.add(cyl(0.09, 0.09, 2.0, C.woodDark, 1.0, 1.0, 3.0, 6));
+  const porch = box(2.6, 0.12, 1.2, C.woodDark, 0, 2.05, 2.6);
+  porch.rotation.x = -0.16;
+  g.add(porch);
+  // shuttered windows
+  for (const x of [-1.7, 1.7]) {
+    g.add(box(0.8, 0.8, 0.1, 0x3c4a52, x, 1.6, 2.02));
+    g.add(box(0.2, 0.9, 0.08, C.roofBlue, x - 0.52, 1.6, 2.05));
+    g.add(box(0.2, 0.9, 0.08, C.roofBlue, x + 0.52, 1.6, 2.05));
+  }
+  // chimney
+  g.add(box(0.7, 1.6, 0.7, C.stoneDark, -1.6, 3.6, -0.8));
+  g.add(box(0.85, 0.16, 0.85, C.stone, -1.6, 4.45, -0.8));
+  return g;
+}
+
+function buildFarmShed() {
+  // a small open-fronted outbuilding: lean-to roof, tools, a hay bale
+  const g = new THREE.Group();
+  // three walls, open to the front
+  g.add(box(3.0, 1.9, 0.14, C.wood, 0, 0.95, -1.2));             // back
+  g.add(box(0.14, 1.9, 2.4, C.wood, -1.45, 0.95, 0));            // left
+  g.add(box(0.14, 1.9, 2.4, C.wood, 1.45, 0.95, 0));             // right
+  // lean-to roof, high at the front
+  const roofSlab = box(3.4, 0.14, 2.9, C.woodDark, 0, 2.25, 0.15);
+  roofSlab.rotation.x = 0.2;
+  g.add(roofSlab);
+  // front posts holding the overhang up
+  g.add(cyl(0.08, 0.09, 2.1, C.woodDark, -1.4, 1.05, 1.15, 6));
+  g.add(cyl(0.08, 0.09, 2.1, C.woodDark, 1.4, 1.05, 1.15, 6));
+  // contents: a hay bale and a couple of leaning tools
+  const bale = cyl(0.42, 0.42, 0.8, 0xc9a860, 0.75, 0.42, -0.5, 10);
+  bale.rotation.z = Math.PI / 2;
+  g.add(bale);
+  const fork = cyl(0.035, 0.035, 1.7, C.woodDark, -1.0, 0.85, -0.9, 5);
+  fork.rotation.z = 0.22;
+  g.add(fork);
+  g.add(box(0.36, 0.1, 0.06, 0x8a9099, -1.19, 1.68, -0.9));      // fork head
+  g.add(box(0.5, 0.4, 0.35, C.woodDark, -0.6, 0.2, 0.4));        // crate
+  return g;
+}
+
+function buildHorse(coat = 0x6b4a2f, mane = 0x2e2119) {
+  // a standing horse — parameterised so more coats are one line each
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(1.75, 0.85, 0.7), mat(coat));
+  body.position.y = 1.15;
+  body.castShadow = true; body.receiveShadow = true;
+  g.add(body);
+  g.add(box(0.55, 0.5, 0.6, coat, -0.85, 1.25, 0));              // chest
+  g.add(box(0.5, 0.45, 0.62, coat, 0.8, 1.1, 0));                // haunch
+
+  // neck and head, angled forward
+  const neck = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.9, 0.5), mat(coat));
+  neck.position.set(-1.05, 1.7, 0);
+  neck.rotation.z = 0.42;
+  neck.castShadow = true;
+  g.add(neck);
+  const head = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.34, 0.36), mat(coat));
+  head.position.set(-1.5, 2.05, 0);
+  head.rotation.z = 0.22;
+  head.castShadow = true;
+  g.add(head);
+  g.add(box(0.26, 0.22, 0.3, 0x3a2c20, -1.78, 1.96, 0));         // muzzle
+  // ears
+  g.add(cone(0.07, 0.18, coat, -1.3, 2.28, -0.11, 5));
+  g.add(cone(0.07, 0.18, coat, -1.3, 2.28, 0.11, 5));
+
+  // mane down the neck, and a tail
+  const m = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.95, 0.16), mat(mane));
+  m.position.set(-0.95, 1.78, 0);
+  m.rotation.z = 0.42;
+  g.add(m);
+  const tail = cyl(0.06, 0.1, 0.85, mane, 1.08, 1.0, 0, 6);
+  tail.rotation.z = -0.35;
+  g.add(tail);
+
+  // legs
+  for (const [x, z] of [[-0.6, -0.24], [-0.6, 0.24], [0.62, -0.24], [0.62, 0.24]]) {
+    const leg = cyl(0.11, 0.13, 1.45, coat, x, 0.72, z, 6);
+    leg.castShadow = true;
+    g.add(leg);
+    g.add(cyl(0.13, 0.13, 0.14, 0x2a2119, x, 0.07, z, 6));       // hoof
+  }
+  return g;
+}
+
 function buildChest(bodyColor, bandColor) {
   const g = new THREE.Group();
   g.add(box(0.95, 0.5, 0.6, bodyColor, 0, 0.25, 0));                 // body
@@ -712,7 +801,13 @@ export const ASSET_DEFS = {
   rosebush:    { url: null, build: buildRoseBush,    footprint: 1.0,  collider: 0.5, instanced: true, noCastShadow: true },
   shop_small:  { url: null, build: buildShopSmall,   footprint: 4.4,  collider: 2.4 },
   blacksmith:  { url: null, build: buildBlacksmith,  footprint: 5.2,  collider: 2.8 },
-  farm_house: { url: null, build: buildFarmHouse,   footprint: 6.5,  collider: 3.4 },
+  farm_house:  { url: null, build: buildFarmHouse,   footprint: 5.0,  collider: 2.8 },
+  // the old cattle_farm geometry, kept as its own asset rather than lost
+  barn:        { url: null, build: buildBarn,        footprint: 6.5,  collider: 3.4 },
+  farm_shed:   { url: null, build: buildFarmShed,    footprint: 3.2,  collider: 1.6 },
+  // horses: the builder takes (coat, mane), so a new colour is one line
+  horse:       { url: null, build: () => buildHorse(0x6b4a2f, 0x2e2119), footprint: 2.0, collider: 0.9 },
+  horse_grey:  { url: null, build: () => buildHorse(0x9a9691, 0x5f5b56), footprint: 2.0, collider: 0.9 },
   dock:        { url: null, build: buildDock,        footprint: 2.6,  collider: null, noCastShadow: true },
   stone_face:  { url: null, build: buildStoneFace,   footprint: 2.2,  collider: 0.9 },
   // `mirage` is the decorative cave you place by hand; `magick_cave` above is
@@ -724,7 +819,6 @@ export const ASSET_DEFS = {
   tower:       { url: null, build: buildTower,      footprint: 3.8,  collider: 2.0 },
   well:        { url: null, build: buildWell,       footprint: 2.0,  collider: 1.1 },
   stall:       { url: null, build: buildStall,      footprint: 2.8,  collider: 1.4 },
-  horse:       { url: null, build: buildHorse,      footprint: 1.2,  collider: 0.6, noCastShadow: true },
   // `instanced` — all placements of this asset render as ONE draw call per
   //   part via InstancedMesh (they stay individually editable in the editor).
   // `noCastShadow` — small props skip the shadow pass entirely.
