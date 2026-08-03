@@ -43,7 +43,11 @@ export class Player {
 
     this.pos = new THREE.Vector3(world.spawn.x, 0, world.spawn.z);
     this.heading = 0;
-    this.moveTarget = null;          // Vector3 from tap-to-move
+    this.moveTarget = null;          // current waypoint
+    this.nav = null;                 // NavGrid, attached by main.js
+    this._path = null;               // remaining waypoints
+    this._pathIdx = 0;
+    this._finalTarget = null;
     this._lastDist = null;           // progress tracking for stuck detection
     this._stuckTime = 0;
     this._marker = this._makeMarker();
@@ -79,6 +83,9 @@ export class Player {
 
   _clearTarget() {
     this.moveTarget = null;
+    this._path = null;
+    this._finalTarget = null;
+    this._replanned = false;
     this._lastDist = null;
     this._stuckTime = 0;
     this._marker.material.opacity = 0;
@@ -95,12 +102,43 @@ export class Player {
   }
   get marker() { return this._marker; }
 
+  /** Walk to a point. If a NavGrid is attached, this routes AROUND
+   *  obstacles instead of steering straight at them and sliding. */
   setMoveTarget(point) {
-    this.moveTarget = point.clone();
+    const dest = point.clone();
+    this._marker.position.set(dest.x, 0.04, dest.z);
+    this._marker.material.opacity = 0.9;
+
+    if (this.nav) {
+      const path = this.nav.findPath(this.pos, { x: dest.x, z: dest.z });
+      if (path && path.length) {
+        this._path = path;
+        this._pathIdx = 0;
+        const first = path[0];
+        this.moveTarget = new dest.constructor(first.x, 0, first.z);
+        this._finalTarget = dest;
+        this._lastDist = null;
+        this._stuckTime = 0;
+        return;
+      }
+      // no route at all — walk as far as we can and let sliding handle it
+    }
+    this._path = null;
+    this.moveTarget = dest;
+    this._finalTarget = dest;
     this._lastDist = null;
     this._stuckTime = 0;
-    this._marker.position.set(point.x, 0.04, point.z);
-    this._marker.material.opacity = 0.9;
+  }
+
+  /** Advance to the next waypoint; returns false when the path is done. */
+  _nextWaypoint() {
+    if (!this._path || this._pathIdx >= this._path.length - 1) return false;
+    this._pathIdx++;
+    const p = this._path[this._pathIdx];
+    this.moveTarget.set(p.x, 0, p.z);
+    this._lastDist = null;
+    this._stuckTime = 0;
+    return true;
   }
 
   get isMoving() { return this._speedNow > 0.01; }
@@ -112,8 +150,11 @@ export class Player {
     if (this.moveTarget) {
       dir.subVectors(this.moveTarget, this.pos).setY(0);
       const dist = dir.length();
-      if (dist < 0.15) {
-        this._clearTarget();
+      if (dist < 0.25) {
+        // reached this waypoint — carry on to the next, or stop
+        if (!this._nextWaypoint()) {
+          this._clearTarget();
+        }
         dir.set(0, 0, 0);
       } else {
         dir.normalize();
@@ -125,11 +166,22 @@ export class Player {
         // rather than orbiting forever
         if (this._lastDist !== null && dist > this._lastDist - 0.005) {
           this._stuckTime += dt;
-          if (this._stuckTime > 0.8) {
-            this._clearTarget();
-            dir.set(0, 0, 0);
+          if (this._stuckTime > 0.7) {
+            // wedged. Re-plan once from where we actually are — the world
+            // may have changed, or we clipped a corner — and only give up
+            // if the fresh route also fails.
+            const goal = this._finalTarget;
+            this._stuckTime = 0;
+            if (goal && this.nav && !this._replanned) {
+              this._replanned = true;
+              this.setMoveTarget(goal);
+            } else {
+              this._clearTarget();
+              dir.set(0, 0, 0);
+            }
           }
         } else {
+          this._replanned = false;
           this._stuckTime = 0;
         }
         this._lastDist = dist;
