@@ -1,0 +1,23 @@
+{
+  "house_small": "assets/models/house_small.glb",
+  "wall": "assets/models/wall.glb",
+  "wall_corner": "assets/models/wall_corner_round.glb",
+  "fence": "assets/models/fence_segment.glb",
+  "dock": "assets/models/dock.glb",
+  "fence2": "assets/models/fence_2.glb",
+  "house_large": "assets/models/house_large.glb",
+  "chest_wood": "assets/models/wooden_chest.glb",
+  "farm_plot": "assets/models/soil_plot.glb",
+  "book_pickup": "assets/models/book.glb",
+  "well": "assets/models/well.glb",
+  "shop_small": "assets/models/shop_small.glb",
+  "magick_cave": "assets/models/mirage_cave.glb",
+  "blacksmith": "assets/models/blacksmith_shop.glb",
+  "rosebush": "assets/models/rose_bush.glb",
+  "stone_face": "assets/models/stone_exterior.glb",
+  "crate": "assets/models/crates.glb",
+  "tavern": "assets/models/tavern.glb",
+  "stall": "assets/models/shop_stall.glb",
+  "horse": "assets/models/horse.glb",
+  "farm_house": "assets/models/Farm_House.glb"
+}
