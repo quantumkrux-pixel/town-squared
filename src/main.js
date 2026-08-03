@@ -8,6 +8,7 @@ import { AssetRegistry } from './AssetRegistry.js';
 import { World } from './World.js';
 import { CameraRig } from './CameraRig.js';
 import { Player } from './Player.js';
+import { NavGrid } from './NavGrid.js';
 import { RemotePlayers } from './RemotePlayers.js';
 import { createNetwork } from './net/NetworkManager.js';
 import { Editor } from './Editor.js';
@@ -119,6 +120,7 @@ const registry = new AssetRegistry();
 const world = new World(scene, registry);
 const rig = new CameraRig(camera, canvas, CONFIG.CAMERA);
 
+let nav;
 let player, remotes, net, editor, interactions, inventory, containers, roles, tasks, brain, skills, mirage, mapView, biblio, farming, shop, stones, library, gardenQuest;
 
 async function boot() {
@@ -270,6 +272,11 @@ async function boot() {
 
   const playerMesh = await registry.instance('char_player');
   player = new Player(playerMesh, world, CONFIG.PLAYER, identity.name);
+
+  // pathfinding: a grid over the world's colliders, so tapping a spot
+  // behind a wall routes around it instead of jamming into the wall
+  nav = new NavGrid(world, { cell: 0.8, radius: CONFIG.PLAYER.radius ?? 0.42 });
+  player.nav = nav;
   scene.add(playerMesh, player.marker);
   rig.follow(player.pos);
   rig.target.copy(player.pos);
@@ -522,7 +529,10 @@ function loop(now) {
 
   // static world changed (editor, chest de/respawn, model swap) → one
   // shadow-map render, instead of one every frame
-  if (world.consumeStaticDirty()) renderer.shadowMap.needsUpdate = true;
+  if (world.consumeStaticDirty()) {
+    renderer.shadowMap.needsUpdate = true;
+    nav?.markDirty();          // colliders moved — re-plan on the next click
+  }
 
   renderer.render(scene, camera);
 }
