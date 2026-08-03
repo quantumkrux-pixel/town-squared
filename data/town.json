@@ -1125,12 +1125,12 @@
     {
       "asset": "garden_bed",
       "x": -63,
-      "z": 19.0,
+      "z": 19,
       "rotY": 0
     },
     {
       "asset": "stone_water",
-      "x": -80.0,
+      "x": -80,
       "z": 7.5,
       "rotY": 3.14
     },
@@ -1148,9 +1148,9 @@
     },
     {
       "asset": "stone_root",
-      "x": -80.0,
+      "x": -80,
       "z": 22.5,
-      "rotY": 0.0
+      "rotY": 0
     },
     {
       "asset": "stone_eye",
@@ -1173,8 +1173,27 @@
     {
       "asset": "garden_bed",
       "x": -60,
-      "z": 19.0,
+      "z": 19,
       "rotY": 0
+    },
+    {
+      "asset": "horse",
+      "x": -54.5,
+      "z": 5,
+      "rotY": 0
+    },
+    {
+      "asset": "farm_shed",
+      "x": -37.5,
+      "z": 9.5,
+      "rotY": -7.85,
+      "scale": 1.95
+    },
+    {
+      "asset": "horse",
+      "x": -59,
+      "z": 3,
+      "rotY": 1.05
     }
   ],
   "npcs": [
