@@ -90,14 +90,20 @@ function buildHouseSmall() {
 }
 
 function buildFarmHouse() {
+  // a barn: long, red, with a hay door in the gable
   const g = new THREE.Group();
-  g.add(box(4.5, 2.6, 3.4, C.plasterDark, 0, 1.3, 0));
-  g.add(box(4.7, 0.35, 3.6, C.wood, 0, 2.6, 0));                   // beam line
-  g.add(roof(4.5, 1.8, 3.4, C.roofBlue, 2.78));
-  g.add(box(0.9, 1.4, 0.1, C.woodDark, -1.2, 0.7, 1.73));
-  g.add(box(0.7, 0.7, 0.1, 0x8fb4c9, 0.6, 1.6, 1.72));
-  g.add(box(0.7, 0.7, 0.1, 0x8fb4c9, 1.7, 1.6, 1.72));
-  g.add(cyl(0.28, 0.28, 1.5, C.stoneDark, 1.6, 3.4, -0.8, 6));     // chimney
+  g.add(box(6.5, 3.2, 4.6, 0x8c3b32, 0, 1.6, 0));
+  g.add(box(6.7, 0.26, 4.8, C.woodDark, 0, 3.2, 0));
+  g.add(roof(6.5, 2.0, 4.6, 0x4a3a30, 3.3));
+  // big sliding doors
+  g.add(box(1.5, 2.3, 0.14, C.woodDark, -0.8, 1.15, 2.36));
+  g.add(box(1.5, 2.3, 0.14, C.woodDark, 0.8, 1.15, 2.36));
+  g.add(box(3.1, 0.14, 0.16, C.wood, 0, 2.35, 2.42));            // door track
+  // hay door up in the gable, with a hoist beam
+  g.add(box(0.9, 1.0, 0.12, C.woodDark, 0, 3.9, 2.3));
+  g.add(box(0.14, 0.14, 1.0, C.woodDark, 0, 4.6, 2.7));
+  // water trough alongside
+  g.add(box(2.0, 0.4, 0.7, C.woodDark, 4.4, 0.2, 0.6));
   return g;
 }
 
@@ -158,28 +164,38 @@ function buildFenceSegment() {
 }
 
 function buildFenceSegment2() {
+  // a taller paled fence — distinct from the low rail of `fence`
   const g = new THREE.Group();
-  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
-  const awn = box(2.8, 0.08, 1.8, C.woodDark, 1.1, 1.0, -0.5);
-  awn.rotation.x = -0.18;
-  g.add(awn);
-  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
-  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
+  g.add(cyl(0.07, 0.08, 1.5, C.woodDark, -1.2, 0.75, 0, 6));
+  g.add(cyl(0.07, 0.08, 1.5, C.woodDark, 1.2, 0.75, 0, 6));
+  g.add(box(2.5, 0.1, 0.07, C.wood, 0, 1.25, 0));
+  g.add(box(2.5, 0.1, 0.07, C.wood, 0, 0.75, 0));
+  for (let i = -2; i <= 2; i++) {
+    const pale = box(0.12, 1.35, 0.06, C.wood, i * 0.5, 0.68, 0);
+    pale.castShadow = false;
+    g.add(pale);
+  }
   return g;
 }
 
 function buildDock() {
   const g = new THREE.Group();
-  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
-  const awn = box(2.8, 0.08, 1.8, C.woodDark, 1.1, 1.0, -0.5);
-  awn.rotation.x = -0.18;
-  g.add(awn);
-  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
-  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
+  // decking
+  for (let i = 0; i < 7; i++) {
+    const plank = box(2.4, 0.12, 0.42, i % 2 ? C.wood : C.woodDark, 0, 0.6, -1.5 + i * 0.5);
+    plank.receiveShadow = true;
+    g.add(plank);
+  }
+  // support posts down into the water
+  for (const [x, z] of [[-1.0, -1.4], [1.0, -1.4], [-1.0, 1.4], [1.0, 1.4], [-1.0, 0], [1.0, 0]]) {
+    g.add(cyl(0.11, 0.13, 1.5, C.woodDark, x, -0.1, z, 6));
+  }
+  // a mooring cleat and a coil of rope
+  g.add(box(0.16, 0.2, 0.16, C.woodDark, 0.95, 0.75, -1.3));
+  const coil = new THREE.Mesh(new THREE.TorusGeometry(0.18, 0.05, 6, 12), mat(0xbfae86));
+  coil.rotation.x = -Math.PI / 2;
+  coil.position.set(-0.85, 0.7, 1.1);
+  g.add(coil);
   return g;
 }
 
@@ -235,9 +251,22 @@ function buildRock() {
 
 function buildRoseBush() {
   const g = new THREE.Group();
-  const r = new THREE.Mesh(new THREE.DodecahedronGeometry(0.55, 0), mat(C.stone));
-  r.position.y = 0.3; r.scale.y = 0.7; r.castShadow = true; r.receiveShadow = true;
-  g.add(r);
+  // low tangled foliage
+  for (const [x, y, z, r] of [[0, 0.3, 0, 0.42], [0.3, 0.24, 0.2, 0.3],
+                              [-0.28, 0.26, -0.18, 0.32], [0.1, 0.45, -0.25, 0.26]]) {
+    const m = new THREE.Mesh(new THREE.IcosahedronGeometry(r, 0), mat(C.leafDark));
+    m.position.set(x, y, z);
+    m.castShadow = false; m.receiveShadow = true;
+    g.add(m);
+  }
+  // blooms
+  for (const [x, y, z] of [[0.18, 0.62, 0.1], [-0.24, 0.5, 0.16],
+                           [0.02, 0.7, -0.2], [0.34, 0.44, -0.1]]) {
+    const bloom = new THREE.Mesh(new THREE.SphereGeometry(0.09, 6, 5), mat(0xc23b5a));
+    bloom.position.set(x, y, z);
+    bloom.castShadow = false;
+    g.add(bloom);
+  }
   return g;
 }
 
@@ -520,6 +549,42 @@ function buildGardenBed() {
   return g;
 }
 
+function buildWall() {
+  // a straight run of town wall: capped, with a little batter
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(3.0, 2.4, 0.9), mat(C.stone));
+  body.position.y = 1.2;
+  body.castShadow = true; body.receiveShadow = true;
+  g.add(body);
+  g.add(box(3.2, 0.22, 1.1, C.stoneDark, 0, 2.45, 0));           // cap
+  // crenellations
+  for (const x of [-1.1, -0.35, 0.4, 1.15]) {
+    g.add(box(0.5, 0.42, 0.9, C.stone, x, 2.75, 0));
+  }
+  // a few stones picked out for texture
+  g.add(box(0.7, 0.34, 0.94, C.stoneDark, -0.85, 0.6, 0));
+  g.add(box(0.6, 0.34, 0.94, C.stoneDark, 0.7, 1.35, 0));
+  return g;
+}
+
+function buildWallCorner() {
+  // an L of wall with a squat tower at the elbow
+  const g = new THREE.Group();
+  const a = new THREE.Mesh(new THREE.BoxGeometry(2.2, 2.4, 0.9), mat(C.stone));
+  a.position.set(1.1, 1.2, 0);
+  const b = new THREE.Mesh(new THREE.BoxGeometry(0.9, 2.4, 2.2), mat(C.stone));
+  b.position.set(0, 1.2, 1.1);
+  for (const m of [a, b]) { m.castShadow = true; m.receiveShadow = true; g.add(m); }
+  // the corner drum
+  g.add(cyl(0.85, 0.95, 3.1, C.stoneDark, 0, 1.55, 0, 10));
+  g.add(cyl(1.0, 1.0, 0.24, C.stone, 0, 3.2, 0, 10));
+  for (let i = 0; i < 6; i++) {
+    const t = (i / 6) * Math.PI * 2;
+    g.add(box(0.34, 0.4, 0.34, C.stone, Math.cos(t) * 0.78, 3.5, Math.sin(t) * 0.78));
+  }
+  return g;
+}
+
 function buildChest(bodyColor, bandColor) {
   const g = new THREE.Group();
   g.add(box(0.95, 0.5, 0.6, bodyColor, 0, 0.25, 0));                 // body
@@ -548,39 +613,62 @@ function buildCharacter(color = 0x4a7dbd) {
 
 function buildStoneFace() {
   const g = new THREE.Group();
-  g.add(box(2.4, 0.9, 1.2, C.wood, 0, 0.45, 0));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, -1.1, 1.0, -0.5));
-  g.add(box(0.1, 2.0, 0.1, C.woodDark, 1.1, 1.0, -0.5));
-  const awn = box(2.8, 0.08, 1.8, C.cloth, 0, 2.05, 0.1);
-  awn.rotation.x = -0.18;
-  g.add(awn);
-  g.add(box(0.4, 0.25, 0.4, 0xc9863b, -0.5, 1.0, 0.1));  // produce
-  g.add(box(0.4, 0.3, 0.4, 0x9c3d3d, 0.4, 1.03, -0.1));
+  // a weathered monolith, tilted, with a face cut into it
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(1.7, 2.9, 0.9), mat(C.stoneDark));
+  slab.position.y = 1.45;
+  slab.rotation.z = 0.05;
+  slab.castShadow = true; slab.receiveShadow = true;
+  g.add(slab);
+  g.add(box(2.2, 0.3, 1.3, C.stone, 0, 0.15, 0));                // buried base
+  // brow, eyes, mouth — shallow cuts, deliberately crude
+  g.add(box(1.3, 0.16, 0.1, 0x5f6469, 0, 2.15, 0.47));
+  g.add(box(0.26, 0.2, 0.1, 0x3a3e42, -0.34, 1.88, 0.47));
+  g.add(box(0.26, 0.2, 0.1, 0x3a3e42, 0.34, 1.88, 0.47));
+  g.add(box(0.16, 0.42, 0.1, 0x5f6469, 0, 1.55, 0.47));          // nose
+  g.add(box(0.7, 0.13, 0.1, 0x3a3e42, 0, 1.15, 0.47));           // mouth
+  // moss at the foot
+  g.add(box(1.9, 0.1, 1.1, C.leafDark, 0.1, 0.32, 0.1));
   return g;
+}
 
 function buildShopSmall() {
   const g = new THREE.Group();
-  g.add(box(5.5, 3.0, 4.2, C.wood, 0, 1.5, 0));
-  g.add(box(5.7, 0.3, 4.4, C.woodDark, 0, 3.0, 0));
-  g.add(roof(5.5, 2.1, 4.2, C.roofPurple, 3.15));
-  g.add(box(1.1, 1.6, 0.12, C.woodDark, 0, 0.8, 2.14));
-  // hanging sign
-  g.add(box(1.4, 0.08, 0.08, C.woodDark, 2.2, 2.5, 2.35));
-  g.add(box(0.9, 0.6, 0.06, C.gold, 2.4, 2.05, 2.35));
-  g.add(cyl(0.3, 0.3, 1.8, C.stoneDark, -2.0, 4.0, -1.2, 6));
+  g.add(box(4.4, 2.6, 3.6, C.plaster, 0, 1.3, 0));
+  g.add(box(4.6, 0.24, 3.8, C.woodDark, 0, 2.6, 0));
+  g.add(roof(4.4, 1.5, 3.6, C.roofPurple, 2.7));
+  // wide shop window with a counter ledge
+  g.add(box(2.2, 1.1, 0.12, 0x3c4a52, 0, 1.35, 1.84));
+  g.add(box(2.6, 0.14, 0.5, C.woodDark, 0, 0.78, 2.0));
+  g.add(box(0.9, 1.7, 0.12, C.woodDark, -1.6, 0.85, 1.84));      // door
+  // striped awning over the window
+  const awn = box(2.8, 0.1, 1.2, 0xb4483c, 0, 2.05, 2.3);
+  awn.rotation.x = -0.3;
+  g.add(awn);
+  // hanging sign on a bracket
+  g.add(box(0.9, 0.07, 0.07, C.woodDark, 2.4, 2.3, 1.9));
+  g.add(box(0.7, 0.5, 0.06, C.gold, 2.75, 1.98, 1.9));
   return g;
 }
 
 function buildBlacksmith() {
   const g = new THREE.Group();
-  g.add(box(5.5, 3.0, 4.2, C.wood, 0, 1.5, 0));
-  g.add(box(5.7, 0.3, 4.4, C.woodDark, 0, 3.0, 0));
-  g.add(roof(5.5, 2.1, 4.2, C.roofPurple, 3.15));
-  g.add(box(1.1, 1.6, 0.12, C.woodDark, 0, 0.8, 2.14));
-  // hanging sign
-  g.add(box(1.4, 0.08, 0.08, C.woodDark, 2.2, 2.5, 2.35));
-  g.add(box(0.9, 0.6, 0.06, C.gold, 2.4, 2.05, 2.35));
-  g.add(cyl(0.3, 0.3, 1.8, C.stoneDark, -2.0, 4.0, -1.2, 6));
+  g.add(box(5.2, 2.6, 4.0, C.stone, 0, 1.3, 0));                 // stone walls
+  g.add(box(5.4, 0.28, 4.2, C.woodDark, 0, 2.6, 0));
+  g.add(roof(5.2, 1.6, 4.0, 0x4a4a4a, 2.7));                     // slate roof
+  // open forge front — a wide dark bay instead of a door
+  g.add(box(2.4, 1.8, 0.14, 0x2a2018, 0, 0.9, 2.05));
+  const coals = box(1.6, 0.2, 0.5, 0xff6a2a, 0, 0.35, 1.9);
+  coals.material = new THREE.MeshLambertMaterial({
+    color: 0xff8c3a, emissive: 0xff5a10, emissiveIntensity: 1.4 });
+  g.add(coals);
+  // chimney with a smoke stack
+  g.add(box(1.0, 2.4, 1.0, C.stoneDark, -1.7, 3.4, -1.0));
+  g.add(box(1.2, 0.2, 1.2, 0x4a4a4a, -1.7, 4.6, -1.0));
+  // anvil out front, on a stump
+  g.add(cyl(0.28, 0.32, 0.5, C.woodDark, 2.2, 0.25, 2.6, 8));
+  const anvil = box(0.7, 0.22, 0.28, 0x55595e, 2.2, 0.61, 2.6);
+  g.add(anvil);
+  g.add(box(0.26, 0.16, 0.26, 0x55595e, 1.95, 0.78, 2.6));
   return g;
 }
   
@@ -608,6 +696,22 @@ function buildGuard() {
 
 export const ASSET_DEFS = {
   house_small: { url: null, build: buildHouseSmall, footprint: 3.4,  collider: 2.0 },
+  // ---- restored: assets Town~Squared places, whose defs were lost ----
+  // (67 placements were falling back to the magenta debug cube)
+  wall:        { url: null, build: buildWall,        footprint: 3.0,  collider: 1.4, instanced: true },
+  wall_corner: { url: null, build: buildWallCorner,  footprint: 3.0,  collider: 1.4 },
+  fence:       { url: null, build: buildFenceSegment,  footprint: 2.5, collider: 0.9, instanced: true, noCastShadow: true },
+  fence2:      { url: null, build: buildFenceSegment2, footprint: 2.5, collider: 0.9, instanced: true, noCastShadow: true },
+  rosebush:    { url: null, build: buildRoseBush,    footprint: 1.0,  collider: 0.5, instanced: true, noCastShadow: true },
+  shop_small:  { url: null, build: buildShopSmall,   footprint: 4.4,  collider: 2.4 },
+  blacksmith:  { url: null, build: buildBlacksmith,  footprint: 5.2,  collider: 2.8 },
+  cattle_farm: { url: null, build: buildFarmHouse,   footprint: 6.5,  collider: 3.4 },
+  dock:        { url: null, build: buildDock,        footprint: 2.6,  collider: null, noCastShadow: true },
+  stone_face:  { url: null, build: buildStoneFace,   footprint: 2.2,  collider: 0.9 },
+  // `mirage` is the decorative cave you place by hand; `magick_cave` above is
+  // the one Mirage.js spawns and despawns on its own schedule
+  mirage:      { url: null, build: buildMagickCave,  footprint: 4.6,  collider: null, noCastShadow: true },
+
   house_large: { url: null, build: buildHouseLarge, footprint: 4.8,  collider: 2.6 },
   tavern:      { url: null, build: buildTavern,     footprint: 5.8,  collider: 3.2 },
   tower:       { url: null, build: buildTower,      footprint: 3.8,  collider: 2.0 },
