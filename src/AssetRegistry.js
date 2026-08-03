@@ -608,26 +608,18 @@ function buildGuard() {
 
 export const ASSET_DEFS = {
   house_small: { url: null, build: buildHouseSmall, footprint: 3.4,  collider: 2.0 },
-  farmhouse: { url: null, build: buildFarmHouse, footprint: 4.8,  collider: 2.6 },
   house_large: { url: null, build: buildHouseLarge, footprint: 4.8,  collider: 2.6 },
   tavern:      { url: null, build: buildTavern,     footprint: 5.8,  collider: 3.2 },
   tower:       { url: null, build: buildTower,      footprint: 3.8,  collider: 2.0 },
   well:        { url: null, build: buildWell,       footprint: 2.0,  collider: 1.1 },
   stall:       { url: null, build: buildStall,      footprint: 2.8,  collider: 1.4 },
-  dock:        { url: null, build: buildDock, footprint: 3.4,  collider: 2.0 },
-  shop_small: { url: null, build: buildShopSmall, footprint: 3.4,  collider: 2.0 },
-  blacksmith: { url: null, build: buildBlacksmith, footprint: 3.4,  collider: 2.0 },
   // `instanced` — all placements of this asset render as ONE draw call per
   //   part via InstancedMesh (they stay individually editable in the editor).
   // `noCastShadow` — small props skip the shadow pass entirely.
-  stone_face:  { url: null, build: buildStoneFace,      footprint: 2.8,  collider: 1.4, instanced: true },
-  fence:       { url: null, build: buildFenceSegment,      footprint: 2.8,  collider: 1.4, instanced: true },
-  fence2:      { url: null, build: buildFenceSegment2,      footprint: 2.8,  collider: 1.4, instanced: true },
   tree_pine:   { url: null, build: buildTree,       footprint: 2.2,  collider: 0.4, instanced: true },
   tree_round:  { url: null, build: buildTreeRound,  footprint: 2.3,  collider: 0.4, instanced: true },
   lamp:        { url: null, build: buildLamp,       footprint: 0.6,  collider: 0.25, instanced: true, noCastShadow: true },
   rock:        { url: null, build: buildRock,       footprint: 1.1,  collider: 0.6,  instanced: true, noCastShadow: true },
-  rosebush:    { url: null, build: buildRoseBush,   footprint: 1.1,  collider: 0.6,  instanced: true, noCastShadow: true },
   crate:       { url: null, build: buildCrate,      footprint: 1.2,  collider: 0.6,  instanced: true, noCastShadow: true },
   // containers: `container` names the loot table (data/loot.json) — that's
   // the flag that makes an asset openable by players
