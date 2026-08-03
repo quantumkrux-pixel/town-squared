@@ -1096,7 +1096,7 @@
       "y": -0.2
     },
     {
-      "asset": "cattle_farm",
+      "asset": "farm_house",
       "x": -49.5,
       "z": 28,
       "rotY": -2.62,
@@ -1378,7 +1378,7 @@
       ]
     },
     {
-      "name": "Odell the Farmer",
+      "name": "Orville the Farmer",
       "asset": "char_npc",
       "speed": 0.9,
       "role": "Farmer",
@@ -1392,8 +1392,8 @@
         "Seeds in the ground beat coin in the pocket. Slower, mind.",
         "Water it twice and leave it be. Drowning's the commonest way to kill a thing that's trying.",
         "Moonpetal? Aye, I stock it. Two days and a steady hand. Not for beginners.",
-        "That bed at the end of the row? Half-built. It'll stay that way till someone earns the timber.",
-        "The mill's quiet, so I cart my grain east now. Costs me a day's walk."
+        "Those beds over by the house? Half-built. They'll stay that way till someone's ready to help finish them.. Got enough on my plate!",
+        "The mill's quiet, so I cart my grain west now. Costs me a day's walk."
       ],
       "path": [
         [
