@@ -277,6 +277,13 @@ function buildCrate() {
   return g;
 }
 
+function buildHorse() {
+  const g = new THREE.Group();
+  g.add(box(0.7, 0.7, 0.7, C.wood, 0, 0.35, 0));
+  g.add(box(0.55, 0.55, 0.55, C.woodDark, 0.5, 0.28, -0.3));
+  return g;
+}
+
 function buildCampfire() {
   const g = new THREE.Group();
   // stone ring
@@ -705,7 +712,7 @@ export const ASSET_DEFS = {
   rosebush:    { url: null, build: buildRoseBush,    footprint: 1.0,  collider: 0.5, instanced: true, noCastShadow: true },
   shop_small:  { url: null, build: buildShopSmall,   footprint: 4.4,  collider: 2.4 },
   blacksmith:  { url: null, build: buildBlacksmith,  footprint: 5.2,  collider: 2.8 },
-  cattle_farm: { url: null, build: buildFarmHouse,   footprint: 6.5,  collider: 3.4 },
+  farm_house: { url: null, build: buildFarmHouse,   footprint: 6.5,  collider: 3.4 },
   dock:        { url: null, build: buildDock,        footprint: 2.6,  collider: null, noCastShadow: true },
   stone_face:  { url: null, build: buildStoneFace,   footprint: 2.2,  collider: 0.9 },
   // `mirage` is the decorative cave you place by hand; `magick_cave` above is
@@ -717,6 +724,7 @@ export const ASSET_DEFS = {
   tower:       { url: null, build: buildTower,      footprint: 3.8,  collider: 2.0 },
   well:        { url: null, build: buildWell,       footprint: 2.0,  collider: 1.1 },
   stall:       { url: null, build: buildStall,      footprint: 2.8,  collider: 1.4 },
+  horse:       { url: null, build: buildHorse,      footprint: 1.2,  collider: 0.6, noCastShadow: true },
   // `instanced` — all placements of this asset render as ONE draw call per
   //   part via InstancedMesh (they stay individually editable in the editor).
   // `noCastShadow` — small props skip the shadow pass entirely.
