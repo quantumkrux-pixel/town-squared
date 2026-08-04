@@ -146,6 +146,9 @@ async function boot() {
   const server = new ServerCharacter({ auth, cfg: CONFIG });
   await server.init();
 
+  // the wrench belongs to admins only (profiles.is_admin)
+  editor.setAllowed(!!server.profile?.is_admin);
+
   const creator = new CharacterCreate({ auth, cfg: CONFIG });
   const chosenName = await creator.maybeRun(server.profile);
   if (chosenName) await server.reload();          // pick up the new name
