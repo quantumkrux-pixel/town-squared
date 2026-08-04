@@ -91,6 +91,10 @@ export class Editor {
     this.canvas = canvas;
 
     this.active = false;
+    // Editing is gated on profiles.is_admin — the same flag that governs
+    // write access to world_placements. Locked until main.js says otherwise,
+    // and the button stays hidden entirely for everyone else.
+    this.allowed = false;
     this.armedAsset = null;   // asset id ready to place
     this.selected = null;     // placement record (or a book record — see setBibliofolio)
     this.bibliofolio = null;  // set via setBibliofolio(); lets books be arranged here too
@@ -122,6 +126,7 @@ export class Editor {
     this.toggleBtn.id = 'editorToggle';
     this.toggleBtn.textContent = '🔧';
     this.toggleBtn.title = 'Toggle town editor (`)';
+    this.toggleBtn.style.display = 'none';   // shown only for admins
     document.body.appendChild(this.toggleBtn);
 
     this.panel = document.createElement('div');
@@ -289,7 +294,7 @@ export class Editor {
   _bind() {
     this.toggleBtn.addEventListener('click', () => this.setActive(!this.active));
     window.addEventListener('keydown', e => {
-      if (e.code === 'Backquote') this.setActive(!this.active);
+      if (e.code === 'Backquote' && this.allowed) this.setActive(!this.active);
       if (!this.active) return;
       if (e.code === 'Escape') { this.armedAsset = null; this._select(null); this._renderPanel(); }
       if (e.code === 'Delete' || e.code === 'Backspace') this._doAction('del');
@@ -475,7 +480,15 @@ export class Editor {
     this._updateHighlight();
   }
 
+  /** Called once from main.js with the profile's is_admin. */
+  setAllowed(ok) {
+    this.allowed = !!ok;
+    this.toggleBtn.style.display = this.allowed ? '' : 'none';
+    if (!this.allowed && this.active) this.setActive(false);
+  }
+
   setActive(on) {
+    if (on && !this.allowed) return;   // not yours to open
     this.active = on;
     this.toggleBtn.classList.toggle('active', on);
     this.panel.classList.toggle('open', on);
